@@ -15,7 +15,7 @@ class PerfilForm extends Component {
 
   componentWillMount() {
     const { usuario } = this.props
-    this.props.usuario && this.setState({ uid: usuario.uid })
+    usuario && this.setState({ uid: usuario.uid })
   }
 
   disableButton() {
@@ -29,6 +29,8 @@ class PerfilForm extends Component {
   async submit(model) {
     model.uid = this.state.uid
     this.setState({ loading: true })
+    console.log(this.props.usuario)
+    if (this.props.usuario) model.credentials = this.props.usuario
     const response = await this.props.action(model)
     this.setState({ loading: false })
 
@@ -45,7 +47,6 @@ class PerfilForm extends Component {
 
   render() {
     const { usuario } = this.props
-    console.log(this.props)
     return !usuario ? (
       <Row type="flex" align="middle" justify="center">
         <Col span={24}>

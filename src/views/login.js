@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Formsy from 'formsy-react'
 import { facebookLogin, login } from '../actions/auth_acions'
 import {
   Button,
@@ -13,6 +14,7 @@ import {
   message,
   Row
 } from 'antd'
+import { Minput, Mselect } from '../components'
 const { Item } = Form
 const { Content } = Layout
 
@@ -25,17 +27,14 @@ class Login extends Component {
       loading: false,
       button: true
     }
-    this.login = this.login.bind(this)
-    this.handleInput = this.handleInput.bind(this)
+    this.submit = this.submit.bind(this)
+    this.disableButton = this.disableButton.bind(this)
+    this.enableButton = this.enableButton.bind(this)
   }
 
-  async login() {
+  async submit(model) {
     this.setState({ loading: true })
-    const response = await this.props.login(
-      this.state.correo.value,
-      this.state.contrasena.value
-    )
-    console.log(response)
+    const response = await this.props.login(model)
     if (response) this.props.history.push('/')
     else {
       message.error('Usuario o contraseña incorrectos')
@@ -43,23 +42,12 @@ class Login extends Component {
     }
   }
 
-  handleInput(e) {
-    const name = e.target.name
-    const value = e.target.value
-
-    value.length < 6
-      ? this.setState({ [name]: { value, label: 'error' }, button: true })
-      : this.setState({ [name]: { value, label: '' }, button: false })
-
-    name === 'correo' &&
-      (!this.validateMail(value)
-        ? this.setState({ [name]: { value, label: 'error' }, button: true })
-        : this.setState({ [name]: { value, label: '' }, button: false }))
+  disableButton() {
+    this.setState({ canSubmit: false })
   }
 
-  validateMail(email) {
-    var re = /\S+@\S+\.\S+/
-    return re.test(email)
+  enableButton() {
+    this.setState({ canSubmit: true })
   }
 
   render() {
@@ -73,7 +61,40 @@ class Login extends Component {
                 <h2>Inicio se sesión</h2>
               </Col>
               <Col span={24}>
-                <Form>
+                <Formsy
+                  onValidSubmit={this.submit}
+                  onValid={this.enableButton}
+                  onInvalid={this.disableButton}
+                >
+                  <Minput
+                    placeholder="Correo"
+                    name="correo"
+                    type="text"
+                    validations="isEmail"
+                    value=""
+                    validationError="Ingresa un correo válido"
+                    required
+                  />
+                  <Minput
+                    placeholder="Contraseña"
+                    name="contrasena"
+                    type="password"
+                    validations="minLength: 6"
+                    value=""
+                    validationError="Las contraseñas deben tener al menos 6 caracteres"
+                    required
+                  />
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={this.state.loading}
+                    disabled={!this.state.canSubmit}
+                    className="fw"
+                  >
+                    Iniciar sesión
+                  </Button>
+                </Formsy>
+                {/* <Form>
                   <Item validateStatus={this.state.correo.label}>
                     <Input
                       value={this.state.correo.value}
@@ -102,18 +123,7 @@ class Login extends Component {
                       }
                     />
                   </Item>
-                </Form>
-              </Col>
-              <Col span={24}>
-                <Button
-                  onClick={this.login}
-                  disabled={this.state.button}
-                  type="primary"
-                  loading={this.state.loading}
-                  className="fw"
-                >
-                  Iniciar sesión
-                </Button>
+                </Form> */}
               </Col>
               <Col span={24} className="mt-20">
                 <Row type="flex" justify="space-between">

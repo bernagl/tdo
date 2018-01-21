@@ -7,11 +7,12 @@ import {
 } from './types'
 
 export const actualizarPerfil = usuario => async dispatch => {
+  console.log(usuario)
   const auth = firebase.auth().currentUser
   let hasError
   const credential = firebase.auth.EmailAuthProvider.credential(
-    usuario.correo,
-    usuario.contrasena
+    usuario.credentials.correo,
+    usuario.credentials.contrasena
   )
   const user = {
     uid: usuario.uid,
@@ -73,7 +74,6 @@ export const agregarDireccion = data => dispatch => {
     estado: data.estado,
     cp: data.cp
   }
-  console.log(data)
   return firebase
     .database()
     .ref(`usuarios/${data.uid}/direcciones`)
@@ -83,7 +83,6 @@ export const agregarDireccion = data => dispatch => {
 }
 
 export const eliminarDireccion = data => dispatch => {
-  console.log(data)
   return firebase
     .database()
     .ref(`usuarios/${data.uid}/direcciones/${data.id}`)
@@ -93,7 +92,6 @@ export const eliminarDireccion = data => dispatch => {
 }
 
 export const getDireccion = data => dispatch => {
-  console.log(data)
   firebase
     .database()
     .ref(`usuarios/${data.uid}/direcciones/${data.id}`)
@@ -115,8 +113,6 @@ export const getDirecciones = uid => dispatch => {
       snapShot.forEach(direccion => {
         direcciones.push({ id: direccion.key, ...direccion.val() })
       })
-      console.log('getting addresses')
-      console.log(direcciones.length)
 
       direcciones.length === 0 && (direcciones = null)
       dispatch({

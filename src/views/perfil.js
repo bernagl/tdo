@@ -7,12 +7,13 @@ import { Col, Divider, Icon, Row, Tabs } from 'antd'
 const { TabPane } = Tabs
 
 class Perfil extends Component {
-  componentWillMount() {
-    const usuario = this.props.auth
-    this.setState({ ...usuario })
-  }
+  // componentWillMount() {
+  //   const usuario = this.props.auth
+  //   this.setState({ ...usuario })
+  // }
 
   render() {
+    const usuario = this.props.auth
     return (
       <div className="perfil-view">
         <Row type="flex" justify="center" />
@@ -32,7 +33,7 @@ class Perfil extends Component {
                     <PerfilForm
                       titulo="Guardar"
                       action={this.props.actualizarPerfil}
-                      usuario={this.state}
+                      usuario={usuario}
                     />
                   </Col>
                 </Row>

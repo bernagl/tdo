@@ -6,10 +6,10 @@ export const checkSession = () => dispatch => {
   return user ? user : false
 }
 
-export const login = (correo, contrasena) => async dispatch => {
+export const login = (usuario) => async dispatch => {
   return firebase
     .auth()
-    .signInWithEmailAndPassword(correo, contrasena)
+    .signInWithEmailAndPassword(usuario.correo, usuario.contrasena)
     .then(function(user) {
       return firebase
         .database()
