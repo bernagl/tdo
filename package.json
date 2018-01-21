@@ -1,0 +1,28 @@
+{
+  "name": "wootdental",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.0.1",
+    "firebase": "^4.8.1",
+    "formsy-react": "^1.1.2",
+    "localforage": "^1.5.5",
+    "lodash": "^4.17.4",
+    "react": "^16.2.0",
+    "react-burger-menu": "^2.1.11",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.4.0",
+    "redux-thunk": "^2.2.0",
+    "woocommerce-api": "^1.4.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
