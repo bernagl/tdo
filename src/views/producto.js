@@ -10,14 +10,28 @@ const { Footer } = Layout
 class Producto extends Component {
   constructor(props) {
     super(props)
+    this.state = { producto: false }
     this.renderImagenes = this.renderImagenes.bind(this)
     this.renderCategorias = this.renderCategorias.bind(this)
     this.renderVariaciones = this.renderVariaciones.bind(this)
   }
 
   componentDidMount() {
-    this.props.getProducto(this.props.match.params.id)
+    // this.props.getProducto(this.props.match.params.id)
+    this.props.getVariaciones(this.props.match.params.id)
   }
+
+  // componentWillReceiveProps(newProps) {
+  //   const { productos } = newProps
+  //   console.log('productos', productos)
+  //   let producto
+  //   producto =
+  //     productos.length > 0
+  //       ? productos.find(producto => producto.id === this.props.match.params.id)
+  //       : this.props.getProducto(this.props.match.params.id)
+
+  //   this.setState({ producto })
+  // }
 
   componentWillUpdate(newProps) {
     Number(newProps.match.params.id) !== newProps.seleccionado.id &&
@@ -80,9 +94,16 @@ class Producto extends Component {
   }
 
   render() {
-    const producto = this.props.seleccionado
-    return Object.keys(producto).length === 0 ||
-      producto.id !== Number(this.props.match.params.id) ? (
+    console.log(this.props)
+    const producto = this.props.productos
+      ? this.props.productos.find(
+          producto => producto.id === Number(this.props.match.params.id)
+        )
+      : this.props.seleccionado
+    console.log(producto)
+    return producto.id !== Number(this.props.match.params.id) ? (
+      // return Object.keys(producto).length === 0 ||
+      //   producto.id !== Number(this.props.match.params.id) ? (
       <LoadingCard cantidad={1} />
     ) : (
       <div>
@@ -149,6 +170,7 @@ class Producto extends Component {
 function mapDispatchToProps({ productos }) {
   return {
     seleccionado: productos.seleccionado,
+    productos: productos.destacados,
     variaciones: productos.variaciones
   }
 }

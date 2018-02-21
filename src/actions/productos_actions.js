@@ -8,12 +8,13 @@ import {
 } from './types'
 
 export const getProducto = id => async dispatch => {
-  let result = {}
+  let producto
   let data = await WooCommerce.getAsync(`products/${id}`)
-  result.producto = JSON.parse(data.toJSON().body)
-  data = await WooCommerce.getAsync(`products/${id}/variations`)
-  result.variaciones = JSON.parse(data.toJSON().body)
-  dispatch({ type: GET_PRODUCTO, payload: result })
+  // result.producto = JSON.parse(data.toJSON().body)
+  producto = JSON.parse(data.toJSON().body)
+  // data = await WooCommerce.getAsync(`products/${id}/variations`)
+  // result.variaciones = JSON.parse(data.toJSON().body)
+  dispatch({ type: GET_PRODUCTO, payload: producto })
 }
 
 export const getProductosDestacados = () => async dispatch => {
@@ -28,7 +29,7 @@ export const getProductos = () => async dispatch => {
   dispatch({ type: GET_PRODUCTOS, payload: result })
 }
 
-export const getVariaciones = (id) => async dispatch => {
+export const getVariaciones = id => async dispatch => {
   const data = await WooCommerce.getAsync(`products/${id}/variations`)
   const result = JSON.parse(data.toJSON().body)
   dispatch({ type: GET_VARIACIONES, payload: result })

@@ -5,6 +5,7 @@ import {
   GET_PRODUCTOS,
   GET_VARIACIONES
 } from '../actions/types'
+import { REHYDRATE, PURGE } from 'redux-persist'
 
 const INITIAL_STATE = {
   data: [],
@@ -30,11 +31,19 @@ export default function(state = INITIAL_STATE, action) {
     case GET_PRODUCTO:
       return {
         ...state,
-        seleccionado: action.payload.producto,
-        variaciones: action.payload.variaciones
+        // seleccionado: action.payload.producto,
+        seleccionado: action.payload
+        // variaciones: action.payload.variaciones
       }
     case GET_VARIACIONES:
       return { ...state, variaciones: action.payload }
+    case REHYDRATE:
+      if (action.payload) {
+        return action.payload.productos
+      }
+      return {}
+    case PURGE:
+      return {}
     default:
       return state
   }
