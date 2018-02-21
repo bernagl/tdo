@@ -15,7 +15,12 @@ class PerfilForm extends Component {
 
   componentWillMount() {
     const { usuario } = this.props
-    usuario && this.setState({ uid: usuario.uid })
+    usuario
+      ? this.setState({ uid: usuario.uid, titulo: 'Guardar perfil' })
+      : this.setState({
+          titulo: 'Registrarme',
+          usuario: { nombre: '', celular: '', correo: '', contrasena: '' }
+        })
   }
 
   disableButton() {
@@ -29,7 +34,6 @@ class PerfilForm extends Component {
   async submit(model) {
     model.uid = this.state.uid
     this.setState({ loading: true })
-    console.log(this.props.usuario)
     if (this.props.usuario) model.credentials = this.props.usuario
     const response = await this.props.action(model)
     this.setState({ loading: false })
@@ -46,14 +50,15 @@ class PerfilForm extends Component {
   }
 
   render() {
-    const { usuario } = this.props
-    return !usuario ? (
-      <Row type="flex" align="middle" justify="center">
-        <Col span={24}>
-          <Icon type="loading" />
-        </Col>
-      </Row>
-    ) : (
+    const { usuario } = this.props.usuario ? this.props : this.state
+    // return !this.state.uid ? (
+    //   <Row type="flex" align="middle" justify="center">
+    //     <Col span={24}>
+    //       <Icon type="loading" />
+    //     </Col>
+    //   </Row>
+    // ) : (
+    return (
       <Formsy
         onValidSubmit={this.submit}
         onValid={this.enableButton}
@@ -61,6 +66,7 @@ class PerfilForm extends Component {
       >
         <Minput
           name="nombre"
+          placeholder="Nombre"
           type="text"
           icon="user"
           validations="minLength:6"
@@ -70,6 +76,7 @@ class PerfilForm extends Component {
         />
         <Minput
           name="celular"
+          placeholder="Celular"
           type="text"
           icon="mobile"
           validations={{ minLength: 10, maxLength: 10 }}
@@ -79,6 +86,7 @@ class PerfilForm extends Component {
         />
         <Minput
           name="correo"
+          placeholder="Correo"
           type="email"
           icon="mail"
           validations="isEmail"
@@ -88,6 +96,7 @@ class PerfilForm extends Component {
         />
         <Minput
           name="contrasena"
+          placeholder="Contraseña"
           type="password"
           icon="unlock"
           validations="minLength:6"
@@ -97,6 +106,7 @@ class PerfilForm extends Component {
         />
         <Minput
           name="confirmar"
+          placeholder="Confirmar"
           type="password"
           icon="lock"
           validations="equalsField:contrasena"
@@ -111,7 +121,7 @@ class PerfilForm extends Component {
           disabled={!this.state.canSubmit}
           className="fw"
         >
-          Guardar perfil
+          {this.state.titulo}
         </Button>
       </Formsy>
     )

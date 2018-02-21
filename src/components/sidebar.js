@@ -1,7 +1,10 @@
 import React from 'react'
 import { push as Slider } from 'react-burger-menu'
 import { connect } from 'react-redux'
-import { getCategorias } from '../actions/categorias_actions'
+import {
+  getCategorias,
+  getProductosByCategoria
+} from '../actions/categorias_actions'
 import { Link, NavLink } from 'react-router-dom'
 import { Icon, Menu } from 'antd'
 const { SubMenu } = Menu
@@ -15,10 +18,22 @@ class Sidebar extends React.Component {
   }
   componentDidMount() {
     this.props.getCategorias()
+    // const { categorias } = this.props
+    // categorias.length > 0 &&
+    //   categorias.map(categoria => {
+    //     this.props.getProductosByCategoria(categoria.id)
+    //   })
+  }
+
+  componentWillReceiveProps(props) {
+    // const { categorias } = props
+    // categorias.length > 0 &&
+    //   categorias.map(categoria => {
+    //     this.props.getProductosByCategoria(categoria.id)
+    //   })
   }
 
   toggleMenu() {
-    console.log(this.state)
     this.setState({ isOpen: !this.state.isOpen })
   }
 
@@ -77,8 +92,11 @@ class Sidebar extends React.Component {
   }
 }
 
-function mapDispatchToProps({ categorias }) {
-  return { categorias }
+function mapDispatchToProps({ categorias: { data } }) {
+  return { categorias: data }
 }
 
-export default connect(mapDispatchToProps, { getCategorias })(Sidebar)
+export default connect(mapDispatchToProps, {
+  getCategorias,
+  getProductosByCategoria
+})(Sidebar)

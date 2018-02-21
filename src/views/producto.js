@@ -81,20 +81,6 @@ class Producto extends Component {
 
   render() {
     const producto = this.props.seleccionado
-    // console.log(producto)
-    // let precio = 0
-    // let isProducto = false
-    // if (Object.keys(this.props.seleccionado).length === 0) {
-    //   isProducto = false
-    // } else if (
-    //   Number(this.props.match.params.id) === Number(this.props.seleccionado.id)
-    // ) {
-    //   isProducto = true
-    //   precio = Number(producto.price)
-    //     .toFixed(2)
-    //     .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-    // }
-
     return Object.keys(producto).length === 0 ||
       producto.id !== Number(this.props.match.params.id) ? (
       <LoadingCard cantidad={1} />

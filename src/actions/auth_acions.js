@@ -6,7 +6,7 @@ export const checkSession = () => dispatch => {
   return user ? user : false
 }
 
-export const login = (usuario) => async dispatch => {
+export const login = usuario => async dispatch => {
   return firebase
     .auth()
     .signInWithEmailAndPassword(usuario.correo, usuario.contrasena)
@@ -43,19 +43,17 @@ export const facebookLogin = () => async dispatch => {
 }
 
 export const registro = usuario => async dispatch => {
+  console.log(usuario)
   const usr = {
-    nombre: usuario.nombre.value,
-    celular: usuario.celular.value,
-    correo: usuario.correo.value,
-    contrasena: usuario.contrasena.value,
+    nombre: usuario.nombre,
+    celular: usuario.celular,
+    correo: usuario.correo,
+    contrasena: usuario.contrasena,
     direccion: null
   }
   return firebase
     .auth()
-    .createUserWithEmailAndPassword(
-      usuario.correo.value,
-      usuario.contrasena.value
-    )
+    .createUserWithEmailAndPassword(usuario.correo, usuario.contrasena)
     .then(function(user) {
       firebase
         .database()
@@ -63,7 +61,7 @@ export const registro = usuario => async dispatch => {
         .set(usr)
       user
         .updateProfile({
-          displayName: usuario.nombre.value
+          displayName: usuario.nombre
         })
         .then(
           function() {

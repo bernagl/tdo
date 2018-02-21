@@ -6,3 +6,13 @@ export const getCategorias = () => async dispatch => {
   const result = JSON.parse(data.toJSON().body)
   dispatch({ type: GET_CATEGORIAS, payload: result })
 }
+
+export const getProductosByCategoria = categoria => async dispatch => {
+  const data = await WooCommerce.getAsync(`products?category=${categoria}`)
+  const result = JSON.parse(data.toJSON().body)
+  console.log(categoria, result)
+  dispatch({
+    type: 'PRODUCTOS_BY_CATEGORIA',
+    payload: { id: categoria, data: result }
+  })
+}

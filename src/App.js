@@ -6,31 +6,31 @@ import { checkSession } from './actions/auth_acions'
 import { connect } from 'react-redux'
 
 class App extends Component {
-  componentWillMount() {
-    this.redirect(this.props)
-  }
+  // componentWillMount() {
+  //   this.redirect(this.props)
+  // }
 
-  componentWillUpdate(props) {
-    this.redirect(props)
-  }
+  // componentWillUpdate(props) {
+  //   this.redirect(props)
+  // }
 
-  redirect(props) {
-    if (
-      Object.keys(props.auth).length === 0 &&
-      props.location.pathname !== '/login' &&
-      props.location.pathname !== '/registro' &&
-      props.location.pathname !== '/recuperar'
-    ) {
-      props.history.push('/login')
-    } else if (
-      props.location.pathname === '/login' ||
-      props.location.pathname === '/registro' ||
-      props.location.pathname === '/recuperar'
-    ) {
-      console.log('redirigiendo')
-      Object.keys(props.auth).length > 0 && props.history.push('/')
-    }
-  }
+  // redirect(props) {
+  //   if (
+  //     Object.keys(props.auth).length === 0 &&
+  //     props.location.pathname !== '/login' &&
+  //     props.location.pathname !== '/registro' &&
+  //     props.location.pathname !== '/recuperar'
+  //   ) {
+  //     props.history.push('/login')
+  //   } else if (
+  //     props.location.pathname === '/login' ||
+  //     props.location.pathname === '/registro' ||
+  //     props.location.pathname === '/recuperar'
+  //   ) {
+  //     console.log('redirigiendo')
+  //     Object.keys(props.auth).length > 0 && props.history.push('/')
+  //   }
+  // }
 
   render() {
     return (

@@ -58,7 +58,7 @@ class Login extends Component {
           <Content style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <Row style={{ border: '1px #96D8E9 solid' }} className="bw p20">
               <Col span={24} className="center-text">
-                <h2>Inicio se sesión</h2>
+                <h2>Inicio de sesión</h2>
               </Col>
               <Col span={24}>
                 <Formsy

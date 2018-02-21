@@ -14,10 +14,10 @@ export default function(state = {}, action) {
     case ACTUALIZAR_PERFIL:
       return { ...action.payload }
     case REHYDRATE:
-      // if (action.payload) {
-      return action.payload.auth || {}
-    // }
-    // return {}
+      if (action.payload) {
+        return action.payload.auth
+      }
+      return {}
     case PURGE:
       return {}
     default:

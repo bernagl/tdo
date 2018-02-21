@@ -12,6 +12,8 @@ class Categoria extends Component {
 
   componentDidMount() {
     this.props.getProductosPorCategoria(this.props.match.params.id)
+    this.props.productos[this.props.match.params.id].length === 0 &&
+      this.props.productos[this.props.match.params.id]
   }
 
   componentWillMount() {
@@ -31,28 +33,31 @@ class Categoria extends Component {
   }
 
   renderProductos() {
-    return this.props.productos.categoria.map((producto, key) => {
-      return <Producto producto={producto} link key={key} />
-    })
+    return this.props.productos[this.props.match.params.id].map(
+      (producto, key) => {
+        return <Producto producto={producto} link key={key} />
+      }
+    )
   }
 
   render() {
-    if (
-      this.props.productos.categoria.length <= 0 ||
-      this.props.productos.categoria_seleccionada !== this.props.match.params.id
-    ) {
-      return (
-        <div>
-          <LoadingCard cantidad={5} />
-        </div>
-      )
-    }
+    console.log(this.props.productos[this.props.match.params.id])
+    // if (
+    // this.props.productos.categoria.length <= 0 ||
+    // this.props.productos.categoria_seleccionada !== this.props.match.params.id
+    // ) {
+    //   return (
+    //     <div>
+    //       <LoadingCard cantidad={5} />
+    //     </div>
+    //   )
+    // }
     return <div>{this.renderProductos()}</div>
   }
 }
 
-function mapDispatchToProps({ productos, carrito }) {
-  return { carrito, productos }
+function mapDispatchToProps({ categorias: { productos }, carrito }) {
+  return { productos, carrito }
 }
 
 export default connect(mapDispatchToProps, {

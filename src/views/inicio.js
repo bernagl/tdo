@@ -30,8 +30,8 @@ class Inicio extends Component {
   }
 }
 
-function mapDispatchToProps({ productos }) {
-  return { productos }
+function mapDispatchToProps({ productos, categorias }) {
+  return { productos, categorias }
 }
 
 export default connect(mapDispatchToProps, { getProductosDestacados })(Inicio)
