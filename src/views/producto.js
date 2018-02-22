@@ -44,8 +44,9 @@ class Producto extends Component {
   }
 
   renderCategorias() {
-    return this.props.seleccionado.categories.length > 0 ? (
-      this.props.seleccionado.categories.map((categoria, key) => {
+    const producto = this.props.productos[this.props.match.params.id]
+    return producto.categories.length > 0 ? (
+      producto.categories.map((categoria, key) => {
         return (
           <Tag color="#108ee9" key={key}>
             <Link to={`/categoria/${categoria.id}`}>{categoria.name}</Link>
@@ -94,17 +95,10 @@ class Producto extends Component {
   }
 
   render() {
-    console.log(this.props)
-    const { match, productos } = this.props
-    // let producto =
-    //   productos &&
-    //   productos.find(producto => producto.id === Number(match.params.id))
-    const producto = this.props.productos[match.params.id]
-    !producto && this.props.getProducto(match.params.id)
-
+    const { match, productos, getProducto } = this.props
+    const producto = productos[match.params.id]
+    !producto && getProducto(match.params.id)
     return !producto ? (
-      // return Object.keys(producto).length === 0 ||
-      //   producto.id !== Number(this.props.match.params.id) ? (
       <LoadingCard cantidad={1} />
     ) : (
       <div>
