@@ -15,7 +15,6 @@ class Main extends Component {
           <Layout id="page-wrap">
             <Header
               style={{
-                background: '#fff',
                 paddingLeft: 30,
                 textAlign: 'center'
               }}

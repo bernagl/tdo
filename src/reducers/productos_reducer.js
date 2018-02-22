@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   data: {},
   destacados: [],
   categoria: [],
-  variaciones: [],
+  variaciones: { id: '', data: [] },
   categoria_seleccionada: 0,
   seleccionado: {}
 }
@@ -37,7 +37,11 @@ export default function(state = INITIAL_STATE, action) {
         // variaciones: action.payload.variaciones
       }
     case GET_VARIACIONES:
-      return { ...state, variaciones: action.payload }
+      const { id, data } = action.payload
+      return {
+        ...state,
+        variaciones: { id, data }
+      }
     case REHYDRATE:
       if (action.payload) {
         return action.payload.productos

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Avatar, Card, Icon, Popconfirm } from 'antd'
+import { Avatar, Button, Card, Icon, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import {
   agregarProducto,
@@ -32,59 +32,70 @@ class CarritoItem extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <Card
-        style={{ width: '100%', marginTop: 10 }}
-        actions={[
-          <Icon
-            type="plus"
-            onClick={this.agregarProducto.bind(this, this.props.producto)}
-          />,
-          this.props.producto.cantidad === 0 ? (
-            <Popconfirm
-              title="¿Desea eliminar este producto?"
-              onConfirm={this.eliminarProducto.bind(this, this.props.producto)}
-              okText="Si"
-              placement="left"
-              cancelText="No"
-            >
-              <Icon type="minus" />
-            </Popconfirm>
-          ) : (
-            <Icon
-              type="minus"
-              onClick={this.restarProducto.bind(this, this.props.producto)}
-            />
-          ),
-          <Popconfirm
-            title="¿Desea eliminar este producto?"
-            onConfirm={this.eliminarProducto.bind(this, this.props.producto)}
-            okText="Si"
-            placement="left"
-            cancelText="No"
-          >
-            <Icon type="delete" />
-          </Popconfirm>
-        ]}
-      >
-        <Link to={`/producto/${this.props.producto.id}`}>
-          <Meta
-            avatar={
-              <Avatar
+      <div className="row middle-xs carrito-item" style={{ margin: '5px 0' }}>
+        <div className="col-xs-7">
+          <div className="row middle-xs">
+            <div className="col-xs-4">
+              <img
                 src={this.props.producto.images[0].src}
-                shape="square"
-                size="large"
+                alt=""
+                style={{ width: '100%' }}
               />
-            }
-            title={this.props.producto.name}
-            description={`Cantidad: ${this.props.producto.cantidad} x $${Number(
-              this.props.producto.price
-            )
-              .toFixed(2)
-              .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}`}
-          />
-        </Link>
-      </Card>
+            </div>
+            <div className="col-xs-8">
+              <span>{this.props.producto.name}</span>
+            </div>
+          </div>
+        </div>
+        <div className="col-xs-5">
+          <div className="row middle-xs">
+            <div className="col-xs-6 center-xs middle-xs">
+              {/* <Icon type="minus" className="minus" /> */}
+              {this.props.producto.cantidad === 0 ? (
+                <Popconfirm
+                  title="¿Desea eliminar este producto?"
+                  onConfirm={this.eliminarProducto.bind(
+                    this,
+                    this.props.producto
+                  )}
+                  okText="Si"
+                  placement="bottom"
+                  cancelText="No"
+                >
+                  <Button type="primary" shape="circle" icon="minus" />
+                </Popconfirm>
+              ) : (
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon="minus"
+                  onClick={this.restarProducto.bind(this, this.props.producto)}
+                />
+              )}
+              <span className="cantidad">{`${
+                this.props.producto.cantidad
+              }`}</span>
+              <Button
+                type="primary"
+                shape="circle"
+                icon="plus"
+                onClick={this.agregarProducto.bind(this, this.props.producto)}
+              />
+              {/* <Icon type="plus" className="cprimary bold" className="plus" /> */}
+            </div>
+            <div className="col-xs-6 end-xs">
+              <span className="precio">
+                ${' '}
+                {Number(this.props.producto.price)
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }

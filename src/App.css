@@ -28,6 +28,14 @@
   float: right;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.cprimary {
+  color: #0984e3;
+}
+
 /* Position and sizing of burger button */
 .header {
   padding-left: 0px !important;
@@ -37,12 +45,22 @@
   margin-left: -15px;
 }
 .bm-burger-button {
-  position: fixed;
+  position: absolute;
   width: 20px;
   height: 20px;
   right: 10px;
   top: 20px;
 }
+
+/* Header */
+/* .ant-layout-header{
+  background-color: rebeccapurple;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10
+} */
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
@@ -130,6 +148,7 @@
 }
 .producto-variaciones-col {
   margin-top: 15px;
+  margin-bottom: 42px;
 }
 
 .producto-footer {
@@ -204,6 +223,34 @@
   color: white;
   font-size: 22px;
   margin-top: 4.5px;
+}
+
+.carrito-item .col-xs-6,
+.carrito-item .col-xs-4,
+.carrito-item .col-xs-8,
+.carrito-item .col-xs-5,
+.carrito-item .col-xs-7 {
+  padding: 0 5px;
+}
+
+.carrito-item .precio {
+  padding-right: 5px;
+}
+.carrito-item {
+  background-color: #eee;
+  padding-right: 5px;
+  /* border-radius: 5px */
+}
+
+.carrito-item button {
+  width: 21px;
+  height: 21px;
+}
+
+.carrito-item .cantidad {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
 }
 
 /* Registro */

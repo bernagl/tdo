@@ -34,7 +34,7 @@ export const getProductos = () => async dispatch => {
 export const getVariaciones = id => async dispatch => {
   const data = await WooCommerce.getAsync(`products/${id}/variations`)
   const result = JSON.parse(data.toJSON().body)
-  dispatch({ type: GET_VARIACIONES, payload: result })
+  dispatch({ type: GET_VARIACIONES, payload: { id, data: result } })
 }
 
 export const getProductosPorCategoria = categoria => async dispatch => {

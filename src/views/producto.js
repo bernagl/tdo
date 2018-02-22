@@ -65,7 +65,8 @@ class Producto extends Component {
   }
 
   renderVariaciones() {
-    return this.props.variaciones.map((producto, key) => {
+    // this.props.match.params.id === this.props.variaciones.id ?
+    return this.props.variaciones.data.map((producto, key) => {
       if (producto.attributes.length > 0) {
         let varianteText = ''
         varianteText += producto.attributes.map((variacion, key) => {
@@ -95,7 +96,7 @@ class Producto extends Component {
   }
 
   render() {
-    const { match, productos, getProducto } = this.props
+    const { match, productos, getProducto, variaciones } = this.props
     const producto = productos[match.params.id]
     !producto && getProducto(match.params.id)
     return !producto ? (
@@ -129,7 +130,7 @@ class Producto extends Component {
             {producto.variations.length > 0 && (
               <div>
                 <h4>Variantes:</h4>
-                {this.props.variaciones.length > 0 ? (
+                {this.props.variaciones.id === match.params.id ? (
                   <div>{this.renderVariaciones()}</div>
                 ) : (
                   <Icon type="loading" />

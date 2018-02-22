@@ -69,7 +69,7 @@ class Sidebar extends React.Component {
         outerContainerId={'outer-container'}
         className="slider"
       >
-        <Menu theme="dark" mode="inline">
+        <Menu theme="dark" mode="inline" defaultOpenKeys={['sub1']}>
           <SubMenu
             key="sub1"
             title={
