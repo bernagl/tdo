@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import Formsy from 'formsy-react'
-import { Button, Col, Icon, message, Row } from 'antd'
+import { Button, message } from 'antd'
 import { Minput } from '../components'
 
 class PerfilForm extends Component {

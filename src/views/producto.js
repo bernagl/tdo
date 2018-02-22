@@ -33,10 +33,10 @@ class Producto extends Component {
   //   this.setState({ producto })
   // }
 
-  componentWillUpdate(newProps) {
-    Number(newProps.match.params.id) !== newProps.seleccionado.id &&
-      this.props.getProducto(newProps.match.params.id)
-  }
+  // componentWillUpdate(newProps) {
+  //   Number(newProps.match.params.id) !== newProps.seleccionado.id &&
+  //     this.props.getProducto(newProps.match.params.id)
+  // }
 
   agregarProducto(producto) {
     producto.cantidad = 1
@@ -95,13 +95,14 @@ class Producto extends Component {
 
   render() {
     console.log(this.props)
-    const producto = this.props.productos
-      ? this.props.productos.find(
-          producto => producto.id === Number(this.props.match.params.id)
-        )
-      : this.props.seleccionado
-    console.log(producto)
-    return producto.id !== Number(this.props.match.params.id) ? (
+    const { match, productos } = this.props
+    // let producto =
+    //   productos &&
+    //   productos.find(producto => producto.id === Number(match.params.id))
+    const producto = this.props.productos[match.params.id]
+    !producto && this.props.getProducto(match.params.id)
+
+    return !producto ? (
       // return Object.keys(producto).length === 0 ||
       //   producto.id !== Number(this.props.match.params.id) ? (
       <LoadingCard cantidad={1} />
@@ -170,7 +171,7 @@ class Producto extends Component {
 function mapDispatchToProps({ productos }) {
   return {
     seleccionado: productos.seleccionado,
-    productos: productos.destacados,
+    productos: productos.data,
     variaciones: productos.variaciones
   }
 }

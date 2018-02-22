@@ -7,15 +7,11 @@ import {
   Button,
   Col,
   Divider,
-  Form,
-  Icon,
-  Input,
   Layout,
   message,
   Row
 } from 'antd'
-import { Minput, Mselect } from '../components'
-const { Item } = Form
+import { Minput } from '../components'
 const { Content } = Layout
 
 class Login extends Component {

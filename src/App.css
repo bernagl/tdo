@@ -253,3 +253,20 @@
   padding: 15px;
   /* margin-top: 12px; */
 }
+
+.ant-layout {
+  background-color: white !important;
+}
+
+.ant-card-body {
+  padding: 5px 10px;
+  zoom: 1;
+}
+
+.productos-col-left .col-xs-12 {
+  padding: 0 7.5px 0 15px;
+}
+
+.productos-col-right .col-xs-12 {
+  padding: 0 15px 0 7.5px;
+}

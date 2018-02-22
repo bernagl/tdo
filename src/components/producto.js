@@ -22,40 +22,30 @@ class Producto extends Component {
             src={this.props.producto.images[0].src}
           />
         }
-        // actions={[
-        //   <Button
-        //     type="normal"
-        //     icon="shopping-cart"
-        //     size="large"
-        //     onClick={this.agregarProducto.bind(this, this.props.producto)}
-        //   >
-        //     Agregar
-        //   </Button>
-        // ]}
       >
         <Meta
           title={this.props.producto.name}
           description={this.props.producto.description}
         />
-        <Divider />
-        <Row className="center-text">
-          <Col span={11}>Disponible</Col>
-          <Col span={2}>
-            <Divider type="vertical" />
-          </Col>
-          <Col span={11}>${this.props.producto.price}</Col>
-        </Row>
+        <Divider style={{ margin: '15px 0 10px 0' }} />
+        <div className="row center-text">
+          <div className="col-xs-12">${this.props.producto.price}</div>
+        </div>
       </Card>
     )
-    return this.props.link ? (
-      <Link
-        to={`/producto/${this.props.producto.id}`}
-        key={this.props.producto.id}
-      >
-        {producto}
-      </Link>
-    ) : (
-      <div>{producto}</div>
+    return (
+      <div className="col-xs-12">
+        {this.props.link ? (
+          <Link
+            to={`/producto/${this.props.producto.id}`}
+            key={this.props.producto.id}
+          >
+            {producto}
+          </Link>
+        ) : (
+          { producto }
+        )}
+      </div>
     )
   }
 }

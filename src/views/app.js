@@ -28,7 +28,7 @@ class Main extends Component {
               </Link>
             </Header>
             <Content style={{ margin: '10px' }}>
-              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+              <div style={{ background: '#fff' }}>
                 <Aplicacion />
               </div>
             </Content>

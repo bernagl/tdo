@@ -8,7 +8,7 @@ import {
 import { REHYDRATE, PURGE } from 'redux-persist'
 
 const INITIAL_STATE = {
-  data: [],
+  data: {},
   destacados: [],
   categoria: [],
   variaciones: [],
@@ -32,7 +32,8 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         // seleccionado: action.payload.producto,
-        seleccionado: action.payload
+        seleccionado: action.payload,
+        data: { [action.payload.id]: action.payload, ...state.data }
         // variaciones: action.payload.variaciones
       }
     case GET_VARIACIONES:
