@@ -12,7 +12,7 @@ class Producto extends Component {
       .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
   }
 
-  addTocart = e => {
+  agregarProducto = e => {
     e.preventDefault()
     const { producto } = this.props
     producto.cantidad = 1
@@ -26,7 +26,6 @@ class Producto extends Component {
       <Card
         className="product-card-item"
         hoverable
-        style={{ width: '100%', margin: '10px 0px' }}
         cover={<img alt={producto.name} src={producto.images[0].src} />}
       >
         <Meta
@@ -37,7 +36,7 @@ class Producto extends Component {
           icon="shopping-cart"
           shape="circle"
           className="producto-btn-cart"
-          onClick={this.addTocart}
+          onClick={this.agregarProducto}
         />
         {/* <Divider style={{ margin: '15px 0 10px 0' }} /> */}
         {/* <div className="row center-text">
@@ -47,7 +46,7 @@ class Producto extends Component {
     )
     return (
       // <Col span={12} style={{}}>
-      <div className="col-xs-6" style={{ display: 'flex' }}>
+      <div className="col-xs-6" style={{ display: 'flex', padding: '.5rem' }}>
         {link ? (
           <Link
             to={`/producto/${producto.id}`}

@@ -10,26 +10,24 @@ class Main extends Component {
   render() {
     return (
       <div id="outer-container">
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sidebar />
-          <Layout id="page-wrap">
-            <Header
-              style={{
-                paddingLeft: 30,
-                textAlign: 'center'
-              }}
-            >
-              <Carrito />
-              <Link to="/">
-                <h2 style={{ display: 'inline', textAlign: 'center' }}>
-                  TDO - Tienda
-                </h2>
-              </Link>
-            </Header>
-            <Content style={{ margin: '10px' }}>
-              <Aplicacion />
-            </Content>
-          </Layout>
+        <Sidebar />
+        <Layout id="page-wrap">
+          <Header
+            style={{
+              paddingLeft: 30,
+              textAlign: 'center'
+            }}
+          >
+            <Carrito />
+            <Link to="/">
+              <h2 style={{ display: 'inline', textAlign: 'center' }}>
+                TDO - Tienda
+              </h2>
+            </Link>
+          </Header>
+          <Content style={{ margin: '10px' }}>
+            <Aplicacion />
+          </Content>
         </Layout>
       </div>
     )
