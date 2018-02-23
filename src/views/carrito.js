@@ -74,8 +74,6 @@ class Carrito extends Component {
         quantity: this.props.carrito[producto].cantidad
       })
     }
-    console.log(this.state)
-    console.log(this.props.direccion)
     const billing = this.props.direccion.direcciones[this.state.direccion]
     const usuario = this.props.auth
     const direccion = {
@@ -115,6 +113,12 @@ class Carrito extends Component {
     })
   }
 
+  formatearPrecio(precio) {
+    return Number(precio)
+      .toFixed(2)
+      .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  }
+
   renderDirecciones() {
     const radioStyle = {
       display: 'block',
@@ -134,7 +138,7 @@ class Carrito extends Component {
   renderUsuarioInfo() {
     const { shipping } = this.state
     return (
-      <div>
+      <React.Fragment>
         <Form.Item label="Nombre:">
           <Input
             defaultValue={`${shipping.first_name} ${shipping.last_name}`}
@@ -152,7 +156,7 @@ class Carrito extends Component {
         <Form.Item label="Código postal:">
           <Input defaultValue={shipping.postcode} />
         </Form.Item>
-      </div>
+      </React.Fragment>
     )
   }
 
@@ -167,7 +171,6 @@ class Carrito extends Component {
   }
 
   render() {
-    console.log(this.state)
     const { direcciones } = this.props.direccion
     if (Object.keys(this.props.carrito).length > 0) {
       return (
@@ -197,7 +200,9 @@ class Carrito extends Component {
           <Footer className="carrito-footer">
             <Row type="flex" justify="space-around" align="middle">
               <Col span={24} className="carrito-precio-col">
-                <h1 className="carrito-precio">Total: ${this.state.total}</h1>
+                <h1 className="carrito-precio">
+                  Total: ${this.formatearPrecio(this.state.total)}
+                </h1>
               </Col>
               <Col span={24}>
                 <Button.Group size="large" className="carrito-grupo-de-botones">

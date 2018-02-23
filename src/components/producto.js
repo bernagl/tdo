@@ -1,51 +1,66 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Col, Divider, Row } from 'antd'
+import { Button, Card, Col, Divider, message, Row } from 'antd'
 import { connect } from 'react-redux'
 import { agregarProducto } from '../actions/carrito_actions'
 const { Meta } = Card
 
 class Producto extends Component {
-  // agregarProducto(producto) {
-  //   producto.cantidad = 1
-  //   this.props.agregarProducto(producto)
-  // }
+  formatearPrecio(precio) {
+    return Number(precio)
+      .toFixed(2)
+      .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  }
+
+  addTocart = e => {
+    e.preventDefault()
+    const { producto } = this.props
+    producto.cantidad = 1
+    this.props.agregarProducto(producto)
+    message.success('Producto agregado')
+  }
 
   render() {
-    const producto = (
+    const { link, producto } = this.props
+    const productoItem = (
       <Card
+        className="product-card-item"
         hoverable
         style={{ width: '100%', margin: '10px 0px' }}
-        cover={
-          <img
-            alt={this.props.producto.name}
-            src={this.props.producto.images[0].src}
-          />
-        }
+        cover={<img alt={producto.name} src={producto.images[0].src} />}
       >
         <Meta
-          title={this.props.producto.name}
-          description={this.props.producto.description}
+          title={`$ ${this.formatearPrecio(producto.price)}`}
+          description={producto.name}
         />
-        <Divider style={{ margin: '15px 0 10px 0' }} />
-        <div className="row center-text">
-          <div className="col-xs-12">${this.props.producto.price}</div>
-        </div>
+        <Button
+          icon="shopping-cart"
+          shape="circle"
+          className="producto-btn-cart"
+          onClick={this.addTocart}
+        />
+        {/* <Divider style={{ margin: '15px 0 10px 0' }} /> */}
+        {/* <div className="row center-text">
+          <div className="col-xs-12">${producto.price}</div>
+        </div> */}
       </Card>
     )
     return (
-      <div className="col-xs-12">
-        {this.props.link ? (
+      // <Col span={12} style={{}}>
+      <div className="col-xs-6" style={{ display: 'flex' }}>
+        {link ? (
           <Link
-            to={`/producto/${this.props.producto.id}`}
-            key={this.props.producto.id}
+            to={`/producto/${producto.id}`}
+            key={producto.id}
+            style={{ display: 'flex' }}
           >
-            {producto}
+            {productoItem}
           </Link>
         ) : (
-          { producto }
+          { productoItem }
         )}
       </div>
+      // </Col>
     )
   }
 }

@@ -317,3 +317,16 @@
 .productos-col-right .col-xs-12 {
   padding: 0 15px 0 7.5px;
 }
+
+.producto-btn-cart {
+  position: absolute;
+  /* top: 161px; */
+  top: 9.4rem;
+  /* right: 20px; */
+  right: 6px;
+  z-index: 10;
+}
+
+.product-card-item {
+  /* margin: 6px 0 !important; */
+}

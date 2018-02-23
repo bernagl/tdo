@@ -6,6 +6,7 @@ import {
 } from '../actions/productos_actions'
 import { LoadingCard } from '../components'
 import { Producto } from '../components'
+import { Col, Row } from 'antd'
 
 class Inicio extends Component {
   constructor(props) {
@@ -23,36 +24,38 @@ class Inicio extends Component {
   }
 
   renderProducto(columna) {
-    const { destacados } = this.props.productos
-    const productos = []
-    const i = columna !== 1 ? this.state.length : 0
-    const l = columna === 1 ? this.state.length : destacados.length
-    for (let index = i; index < l; index++) {
-      // columna === 1 && index <= this.state.length
-      //   ?
-      productos.push(<Producto producto={destacados[index]} link key={index} />)
-      // : productos.push(
-      //     <Producto producto={destacados[index]} link key={index} />
-      //   )
-    }
+    // const { destacados } = this.props.productos
+    // const productos = []
+    // const i = columna !== 1 ? this.state.length : 0
+    // const l = columna === 1 ? this.state.length : destacados.length
+    // for (let index = i; index < l; index++) {
+    //   productos.push(<Producto producto={destacados[index]} link key={index} />)
+    // }
 
-    return productos
+    // return productos
+
+    const { destacados } = this.props.productos
+    return destacados.map((producto, key) => {
+      return <Producto producto={producto} link key={key} />
+    })
   }
 
   render() {
-    console.log(this.state)
     if (this.props.productos.destacados.length <= 0) {
       return <LoadingCard cantidad={5} />
     }
 
     return (
       <div className="row">
-        <div className="col-xs-6 productos-col-left">
-          <div className="row">{this.renderProducto(1)}</div>
-        </div>
-        <div className="col-xs-6 productos-col-right">
-          <div className="row">{this.renderProducto()}</div>
-        </div>
+      {/* <Row type="flex" justify="space-around"  style={{ alignItems: 'stretch' }}>  */}
+        {/* <Col span={12}> */}
+        {/* <Row>{this.renderProducto(1)}</Row> */}
+        {/* </Col> */}
+        {/* <Col span={12}> */}
+        {/* <Row>{this.renderProducto()}</Row> */}
+        {/* </Col> */}
+        {this.renderProducto()}
+      {/* </Row> */}
       </div>
     )
   }

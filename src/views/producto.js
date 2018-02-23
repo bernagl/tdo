@@ -66,11 +66,12 @@ class Producto extends Component {
 
   renderVariaciones() {
     // this.props.match.params.id === this.props.variaciones.id ?
+    // console.log(this.props.variaciones.data)
     return this.props.variaciones.data.map((producto, key) => {
       if (producto.attributes.length > 0) {
         let varianteText = ''
         varianteText += producto.attributes.map((variacion, key) => {
-          return `${variacion.name}: ${variacion.option} `
+        return ` ${variacion.name}: ${variacion.option}`
         })
         return (
           <Tag color="#108ee9" key={key}>
