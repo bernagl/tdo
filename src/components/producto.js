@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
-import { Button, Card, Col, Divider, message, Row } from 'antd'
+import { Button, Card, message } from 'antd'
 import { connect } from 'react-redux'
 import { agregarProducto } from '../actions/carrito_actions'
 const { Meta } = Card
 
 class Producto extends Component {
+  // state = { height: 0 }
+
+  // componentDidMount() {
+  //   const height = this.divElement.clientHeight;
+  //   console.log(height)
+  //   this.setState({ height });
+  // }
+
   formatearPrecio(precio) {
     return Number(precio)
       .toFixed(2)
@@ -26,7 +35,14 @@ class Producto extends Component {
       <Card
         className="product-card-item"
         hoverable
-        cover={<img alt={producto.name} src={producto.images[0].src} />}
+        cover={
+          <img
+            alt={producto.name}
+            src={producto.images[0].src}
+            ref={divElement => (this.divElement = divElement)}
+            id={`producto-${this.props.producto.id}`}
+          />
+        }
       >
         <Meta
           title={`$ ${this.formatearPrecio(producto.price)}`}
@@ -37,15 +53,11 @@ class Producto extends Component {
           shape="circle"
           className="producto-btn-cart"
           onClick={this.agregarProducto}
+          // style={{ top: this.state.height - 19 }}
         />
-        {/* <Divider style={{ margin: '15px 0 10px 0' }} /> */}
-        {/* <div className="row center-text">
-          <div className="col-xs-12">${producto.price}</div>
-        </div> */}
       </Card>
     )
     return (
-      // <Col span={12} style={{}}>
       <div className="col-xs-6" style={{ display: 'flex', padding: '.5rem' }}>
         {link ? (
           <Link

@@ -6,7 +6,6 @@ import {
 } from '../actions/productos_actions'
 import { LoadingCard } from '../components'
 import { Producto } from '../components'
-import { Col, Row } from 'antd'
 
 class Inicio extends Component {
   constructor(props) {
@@ -44,10 +43,9 @@ class Inicio extends Component {
     if (this.props.productos.destacados.length <= 0) {
       return <LoadingCard cantidad={5} />
     }
-
     return (
       <div className="row">
-      {/* <Row type="flex" justify="space-around"  style={{ alignItems: 'stretch' }}>  */}
+        {/* <Row type="flex" justify="space-around"  style={{ alignItems: 'stretch' }}>  */}
         {/* <Col span={12}> */}
         {/* <Row>{this.renderProducto(1)}</Row> */}
         {/* </Col> */}
@@ -55,7 +53,7 @@ class Inicio extends Component {
         {/* <Row>{this.renderProducto()}</Row> */}
         {/* </Col> */}
         {this.renderProducto()}
-      {/* </Row> */}
+        {/* </Row> */}
       </div>
     )
   }

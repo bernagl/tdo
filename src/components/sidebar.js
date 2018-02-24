@@ -18,19 +18,6 @@ class Sidebar extends React.Component {
   }
   componentDidMount() {
     this.props.getCategorias()
-    // const { categorias } = this.props
-    // categorias.length > 0 &&
-    //   categorias.map(categoria => {
-    //     this.props.getProductosByCategoria(categoria.id)
-    //   })
-  }
-
-  componentWillReceiveProps(props) {
-    // const { categorias } = props
-    // categorias.length > 0 &&
-    //   categorias.map(categoria => {
-    //     this.props.getProductosByCategoria(categoria.id)
-    //   })
   }
 
   toggleMenu() {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Avatar, Button, Card, Icon, Popconfirm } from 'antd'
+import { Button, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import {
   agregarProducto,
@@ -9,7 +8,6 @@ import {
 } from '../actions/carrito_actions'
 import { showAlert } from '../actions/general_actions'
 
-const { Meta } = Card
 const alert = {
   show: true,
   message: 'Producto eliminado',

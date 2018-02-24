@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getProductosPorCategoria } from '../actions/productos_actions'
 import { toggleLoading } from '../actions/general_actions'
-import { LoadingCard, Producto } from '../components'
+import { Producto } from '../components'
 
 class Categoria extends Component {
   constructor(props) {
@@ -41,7 +41,6 @@ class Categoria extends Component {
   }
 
   render() {
-    console.log(this.props.productos[this.props.match.params.id])
     // if (
     // this.props.productos.categoria.length <= 0 ||
     // this.props.productos.categoria_seleccionada !== this.props.match.params.id
@@ -52,7 +51,7 @@ class Categoria extends Component {
     //     </div>
     //   )
     // }
-    return <div>{this.renderProductos()}</div>
+    return <div className="row">{this.renderProductos()}</div>
   }
 }
 

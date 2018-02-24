@@ -17,7 +17,7 @@ class Producto extends Component {
   }
 
   componentDidMount() {
-    // this.props.getProducto(this.props.match.params.id)
+    this.props.getProducto(this.props.match.params.id)
     this.props.getVariaciones(this.props.match.params.id)
   }
 
@@ -71,7 +71,7 @@ class Producto extends Component {
       if (producto.attributes.length > 0) {
         let varianteText = ''
         varianteText += producto.attributes.map((variacion, key) => {
-        return ` ${variacion.name}: ${variacion.option}`
+          return ` ${variacion.name}: ${variacion.option}`
         })
         return (
           <Tag color="#108ee9" key={key}>
@@ -97,8 +97,9 @@ class Producto extends Component {
   }
 
   render() {
-    const { match, productos, getProducto, variaciones } = this.props
+    const { match, productos, getProducto } = this.props
     const producto = productos[match.params.id]
+    console.log(producto)
     !producto && getProducto(match.params.id)
     return !producto ? (
       <LoadingCard cantidad={1} />

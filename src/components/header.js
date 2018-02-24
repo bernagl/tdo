@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { Carrito, Sidebar } from './index'
 import { Link } from 'react-router-dom'
 import { Layout } from 'antd'
+import logo from '../assets/td.png'
 
 export default class HeaderBar extends Component {
   render() {
     return (
-      <Layout.Header className="header"
+      <Layout.Header
+        className="header"
         style={{
           background: '#fff',
           paddingLeft: 30,
@@ -16,9 +18,10 @@ export default class HeaderBar extends Component {
         <Sidebar />
         <Carrito className="header-carrito" />
         <Link to="/">
-          <h1 style={{ display: 'inline', textAlign: 'center' }}>
+          <img src={logo} alt="" />
+          {/* <h1 style={{ display: 'inline', textAlign: 'center' }}>
             TDO - Tienda
-          </h1>
+          </h1> */}
         </Link>
       </Layout.Header>
     )
