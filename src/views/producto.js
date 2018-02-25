@@ -59,14 +59,14 @@ class Producto extends Component {
   }
 
   renderImagenes() {
-    return this.props.seleccionado.images.map((imagen, key) => {
+    const { match, productos, getProducto } = this.props
+    const producto = productos[match.params.id]
+    return producto.images.map((imagen, key) => {
       return <img src={`${imagen.src}`} alt={`${imagen.name}`} key={key} />
     })
   }
 
   renderVariaciones() {
-    // this.props.match.params.id === this.props.variaciones.id ?
-    // console.log(this.props.variaciones.data)
     return this.props.variaciones.data.map((producto, key) => {
       if (producto.attributes.length > 0) {
         let varianteText = ''
@@ -99,7 +99,6 @@ class Producto extends Component {
   render() {
     const { match, productos, getProducto } = this.props
     const producto = productos[match.params.id]
-    console.log(producto)
     !producto && getProducto(match.params.id)
     return !producto ? (
       <LoadingCard cantidad={1} />
