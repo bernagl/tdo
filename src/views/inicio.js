@@ -11,13 +11,12 @@ class Inicio extends Component {
   constructor(props) {
     super(props)
     this.renderProducto = this.renderProducto.bind(this)
-    this.state = { length: 0, current: 0 }
   }
 
   componentDidMount() {
-    const { destacados } = this.props.productos
-    const length = Math.round(destacados.length / 2)
-    this.setState({ length })
+    // const { destacados } = this.props.productos
+    // const length = Math.round(destacados.length / 2)
+    // this.setState({ length })
     this.props.getProductosDestacados()
     this.props.getProductos()
   }
@@ -33,14 +32,22 @@ class Inicio extends Component {
 
     // return productos
 
-    const { destacados } = this.props.productos
-    return destacados.map((producto, key) => {
-      return <Producto producto={producto} link key={key} />
-    })
+    const { data } = this.props.productos
+    const productos = []
+
+    for (const producto in data) {
+      productos.push( <Producto producto={data[producto]} link key={data[producto].id} /> )
+    }
+
+    return productos
+    // return data.map((producto, key) => {
+    //   return <Producto producto={producto} link key={key} />
+    // })
   }
 
   render() {
-    if (this.props.productos.destacados.length <= 0) {
+    console.log(this.props)
+    if (this.props.productos.data.length <= 0) {
       return <LoadingCard cantidad={5} />
     }
     return (

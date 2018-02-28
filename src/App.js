@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Routes } from './router'
+import { Aplicacion, Routes } from './router'
 import { withRouter } from 'react-router-dom'
 import { checkSession } from './actions/auth_acions'
 import { connect } from 'react-redux'
+import { Button, Modal } from 'antd'
 
 class App extends Component {
+  state = { error: false }
   // componentWillMount() {
   //   this.redirect(this.props)
   // }
@@ -33,12 +35,26 @@ class App extends Component {
   // }
 
   render() {
-    return <Routes />
+    return !this.props.error ? (
+      <Routes />
+    ) : (
+      <Modal
+        title="Ocurrió un error"
+        visible={this.props.error}
+        onOk={() => window.location.reload()}
+        okText="Recargar la aplicación"
+      >
+        <p>
+          Lamentamos que esto haya sucedido, para continuar navegando por favor
+          reacarga la aplicación
+        </p>
+      </Modal>
+    )
   }
 }
 
-function mapDispatchToProps({ auth }) {
-  return { auth }
+function mapDispatchToProps({ auth, general: { error } }) {
+  return { auth, error }
 }
 
 export default withRouter(connect(mapDispatchToProps, { checkSession })(App))

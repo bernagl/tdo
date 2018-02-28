@@ -2,15 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Formsy from 'formsy-react'
-import { facebookLogin, login } from '../actions/auth_acions'
-import {
-  Button,
-  Col,
-  Divider,
-  Layout,
-  message,
-  Row
-} from 'antd'
+import { facebookLogin } from '../actions/auth_acions'
+import { login } from '../actions/wp_actions'
+import { Button, Col, Divider, Layout, message, Row } from 'antd'
 import { Minput } from '../components'
 const { Content } = Layout
 
@@ -90,36 +84,6 @@ class Login extends Component {
                     Iniciar sesión
                   </Button>
                 </Formsy>
-                {/* <Form>
-                  <Item validateStatus={this.state.correo.label}>
-                    <Input
-                      value={this.state.correo.value}
-                      onChange={this.handleInput}
-                      placeholder="Correo"
-                      name="correo"
-                      prefix={
-                        <Icon
-                          type="mail"
-                          style={{ color: 'rgba(0,0,0,.25)' }}
-                        />
-                      }
-                    />
-                  </Item>
-                  <Item validateStatus={this.state.contrasena.label}>
-                    <Input
-                      onChange={this.handleInput}
-                      placeholder="Contraseña"
-                      name="contrasena"
-                      type="password"
-                      prefix={
-                        <Icon
-                          type="unlock"
-                          style={{ color: 'rgba(0,0,0,.25)' }}
-                        />
-                      }
-                    />
-                  </Item>
-                </Form> */}
               </Col>
               <Col span={24} className="mt-20">
                 <Row type="flex" justify="space-between">

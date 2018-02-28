@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getProductosPorCategoria } from '../actions/productos_actions'
+// import { getProductosPorCategoria } from '../actions/productos_actions'
+import { getProductosByCategoria } from '../actions/categorias_actions'
 import { toggleLoading } from '../actions/general_actions'
-import { Producto } from '../components'
+import { LoadingCard, Producto } from '../components'
 
 class Categoria extends Component {
   constructor(props) {
@@ -11,25 +12,21 @@ class Categoria extends Component {
   }
 
   componentDidMount() {
-    this.props.getProductosPorCategoria(this.props.match.params.id)
-    this.props.productos[this.props.match.params.id].length === 0 &&
-      this.props.productos[this.props.match.params.id]
-  }
-
-  componentWillMount() {
-    // if (
-    //   this.props.productos.categoria_seleccionada !== this.props.match.params.id
-    // ) {
-    //   this.props.productos.categoria = []
-    // }
+    this.props.getProductosByCategoria(this.props.match.params.id)
+    // this.props.productos[this.props.match.params.id].length === 0 &&
+    //   this.props.productos[this.props.match.params.id]
   }
 
   componentWillReceiveProps(newProps) {
     if (this.props.match.params.id !== newProps.match.params.id) {
       // this.props.productos.categoria = []
       // this.props.toggleLoading(true)
-      this.props.getProductosPorCategoria(newProps.match.params.id)
+      this.props.getProductosByCategoria(newProps.match.params.id)
     }
+  }
+
+  componentDidCatch() {
+    console.log('error')
   }
 
   renderProductos() {
@@ -41,6 +38,13 @@ class Categoria extends Component {
   }
 
   render() {
+    const { match, productos } = this.props
+    return productos[match.params.id] ? (
+      <div className="row">{this.renderProductos()}</div>
+    ) : (
+      <LoadingCard cantidad={5} />
+    )
+    // productos[]
     // if (
     // this.props.productos.categoria.length <= 0 ||
     // this.props.productos.categoria_seleccionada !== this.props.match.params.id
@@ -51,7 +55,8 @@ class Categoria extends Component {
     //     </div>
     //   )
     // }
-    return <div className="row">{this.renderProductos()}</div>
+    // return <div className="row">...</div>
+    // return <div className="row">{this.renderProductos()}</div>
   }
 }
 
@@ -60,6 +65,6 @@ function mapDispatchToProps({ categorias: { productos }, carrito }) {
 }
 
 export default connect(mapDispatchToProps, {
-  getProductosPorCategoria,
+  getProductosByCategoria,
   toggleLoading
 })(Categoria)

@@ -44,13 +44,13 @@ export default function(state = {}, action) {
     case ELIMINAR_PRODUCTO:
       delete state[action.payload.id]
       return { ...state }
-    case REHYDRATE:
-      if (action.payload) {
-        return action.payload.carrito
-      }
-      return {}
-    case PURGE:
-      return {}
+    // case REHYDRATE:
+    //   if (action.payload) {
+    //     return action.payload.carrito
+    //   }
+    //   return {}
+    // case PURGE:
+    //   return {}
     case VACIAR_CARRITO:
       return []
     default:

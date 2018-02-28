@@ -42,12 +42,12 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         variaciones: { id, data }
       }
-    case REHYDRATE:
-      if (action.payload) {
-        return action.payload.productos
-      }
-      return {}
-    case PURGE:
+    // case REHYDRATE:
+    //   if (action.payload) {
+    //     return action.payload.productos
+    //   }
+    //   return state
+    // case PURGE:
       return {}
     default:
       return state

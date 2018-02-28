@@ -17,8 +17,13 @@ class Producto extends Component {
   }
 
   componentDidMount() {
-    this.props.getProducto(this.props.match.params.id)
-    this.props.getVariaciones(this.props.match.params.id)
+    const { id } = this.props.match.params
+    this.props.getProducto(id)
+    this.props.getVariaciones(id)
+  }
+
+  componentDidCatch() {
+    alert('Hubo un error intesperado, por favor vuelve a recargar la página')
   }
 
   // componentWillReceiveProps(newProps) {
@@ -67,27 +72,31 @@ class Producto extends Component {
   }
 
   renderVariaciones() {
-    return this.props.variaciones.data.map((producto, key) => {
-      if (producto.attributes.length > 0) {
-        let varianteText = ''
-        varianteText += producto.attributes.map((variacion, key) => {
-          return ` ${variacion.name}: ${variacion.option}`
-        })
-        return (
-          <Tag color="#108ee9" key={key}>
-            <Link to={`/producto/${producto.id}`}>{varianteText}</Link>
-          </Tag>
-        )
-      } else {
-        return (
-          <Tag color="#108ee9" key={key}>
-            <Link to={`/producto/${producto.id}`}>
-              {producto.attributes[0].option}
-            </Link>
-          </Tag>
-        )
-      }
-    })
+    const { variaciones } = this.props
+    return (
+      variaciones.data &&
+      variaciones.data.map((producto, key) => {
+        if (producto.attributes.length > 0) {
+          let varianteText = ''
+          varianteText += producto.attributes.map((variacion, key) => {
+            return ` ${variacion.name}: ${variacion.option}`
+          })
+          return (
+            <Tag color="#108ee9" key={key}>
+              <Link to={`/producto/${producto.id}`}>{varianteText}</Link>
+            </Tag>
+          )
+        } else {
+          return (
+            <Tag color="#108ee9" key={key}>
+              <Link to={`/producto/${producto.id}`}>
+                {producto.attributes[0].option}
+              </Link>
+            </Tag>
+          )
+        }
+      })
+    )
   }
 
   formatearPrecio(precio) {
@@ -97,8 +106,13 @@ class Producto extends Component {
   }
 
   render() {
+    console.log(this.props)
     const { match, productos, getProducto } = this.props
     const producto = productos[match.params.id]
+    producto &&
+      (producto.description = producto.description
+        .replace('<p>', '')
+        .replace('</p>', ''))
     !producto && getProducto(match.params.id)
     return !producto ? (
       <LoadingCard cantidad={1} />

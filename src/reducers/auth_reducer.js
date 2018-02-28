@@ -13,12 +13,12 @@ export default function(state = {}, action) {
       return {}
     case ACTUALIZAR_PERFIL:
       return { ...action.payload }
-    case REHYDRATE:
-      if (action.payload) {
-        return action.payload.auth
-      }
-      return {}
-    case PURGE:
+    // case REHYDRATE:
+    //   if (action.payload) {
+    //     return action.payload.auth
+    //   }
+    //   return {}
+    // case PURGE:
       return {}
     default:
       return state
