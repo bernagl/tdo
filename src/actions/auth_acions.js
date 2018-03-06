@@ -43,7 +43,6 @@ export const facebookLogin = () => async dispatch => {
 }
 
 export const registro = usuario => async dispatch => {
-  console.log(usuario)
   const usr = {
     nombre: usuario.nombre,
     celular: usuario.celular,

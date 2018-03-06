@@ -7,7 +7,7 @@ import reducers from '../reducers'
 const config = {
   key: 'root',
   storage: localforage,
-  whitelist: ['carrito', 'categorias', 'auth', 'productos']
+  whitelist: ['carrito', 'categorias', 'auth', 'productos', 'direccion']
 }
 
 const reducer = persistCombineReducers(config, reducers)

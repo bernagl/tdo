@@ -24,6 +24,7 @@ class Login extends Component {
 
   async submit(model) {
     this.setState({ loading: true })
+    console.log(model)
     const response = await this.props.login(model)
     if (response) this.props.history.push('/')
     else {

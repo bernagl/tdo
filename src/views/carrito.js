@@ -12,7 +12,7 @@ import {
   Row,
   Col
 } from 'antd'
-import { CarritoItem } from '../components'
+import { CarritoItem, DireccionForm } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
 import { getDirecciones } from '../actions/perfil_actions'
 import empty_cart from '../empty_cart.png'
@@ -38,7 +38,8 @@ class Carrito extends Component {
   componentDidMount() {
     const { paso } = this.props.match.params
     this.getTotal(this.props.carrito)
-    this.props.getDirecciones(this.props.auth.uid)
+    // this.props.getDirecciones(this.props.auth.uid)
+    this.props.getDirecciones(this.props.auth)
     paso && this.setState({ paso: Number(paso) })
   }
 
@@ -172,6 +173,7 @@ class Carrito extends Component {
 
   render() {
     const { direcciones } = this.props.direccion
+    console.log(this.props)
     if (Object.keys(this.props.carrito).length > 0) {
       return (
         <div className="carrito">
@@ -180,19 +182,7 @@ class Carrito extends Component {
             {this.state.paso === 1 && (
               <Row>
                 <Col span={24}>
-                  {direcciones ? (
-                    <Group
-                      onChange={this.handleDireccion}
-                      value={this.state.direccion}
-                    >
-                      {this.renderDirecciones()}
-                    </Group>
-                  ) : (
-                    <span>No tienes ninguna dirección</span>
-                  )}
-                  <p className="mt-20">
-                    <Link to="/direccion/">Agregar una dirección</Link>
-                  </p>
+                  <DireccionForm />
                 </Col>
               </Row>
             )}
@@ -229,7 +219,7 @@ class Carrito extends Component {
                       onClick={this.enviarPedido}
                       className="carrito-atras-siguiente-btn"
                       disabled={
-                        !this.state.direccion &&
+                        !this.props.direccion &&
                         this.state.direccion !== 0 &&
                         true
                       }

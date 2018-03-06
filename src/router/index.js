@@ -34,9 +34,9 @@ export const Aplicacion = () => {
 export const Routes = () => {
   return (
     <Switch>
-      <Route path="/login" component={Login} />
+      <Route path="/" component={Login} />
       <Route path="/registro" component={Registro} />
-      <Route path="/" component={Main} />
+      {/* <Route path="/" component={Main} /> */}
     </Switch>
   )
 }

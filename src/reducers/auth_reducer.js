@@ -5,12 +5,12 @@ import {
 } from '../actions/types'
 import { REHYDRATE, PURGE } from 'redux-persist'
 
-export default function(state = {}, action) {
+export default function(state = null, action) {
   switch (action.type) {
     case INICIAR_SESION:
-      return { ...action.payload }
+      return action.payload
     case CERRAR_SESION:
-      return {}
+      return null
     case ACTUALIZAR_PERFIL:
       return { ...action.payload }
     // case REHYDRATE:
