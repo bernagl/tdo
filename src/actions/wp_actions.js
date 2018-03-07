@@ -2,63 +2,35 @@ import axios from 'axios'
 import WooCommerce from './woocommerce'
 import { INICIAR_SESION, IS_ERROR } from './types'
 
-// export const login = ({ correo, contrasena }) => async dispatch => {
-//   console.log(correo, contrasena)
-//   const response = await axios.post(
-//     'wservice.php',
-//     {
-//       email: correo,
-//       password: contrasena,
-//       exec: 'auth'
-//     },
-//     {
-//       headers: {
-//         'Content-type': 'multipart/form-data'
-//       }
-//     }
-//   )
-//   console.log(response)
-//   dispatch({ type: INICIAR_SESION, payload: true })
-// }
-
 export const login = ({ correo, contrasena }) => async dispatch => {
-  const data = {
-    email: 'luisg@mobkii.com',
-    password: 'vjvjmmrh1',
-    first_name: 'John',
-    last_name: 'Doe',
-    username: 'john.doe',
-    billing: {
-      first_name: 'John',
-      last_name: 'Doe',
-      company: '',
-      address_1: '969 Market',
-      address_2: '',
-      city: 'San Francisco',
-      state: 'CA',
-      postcode: '94103',
-      country: 'US',
-      email: 'luisg@mobkii.com',
-      phone: '(555) 555-5555'
-    },
-    shipping: {
-      first_name: 'John',
-      last_name: 'Doe',
-      company: '',
-      address_1: '969 Market',
-      address_2: '',
-      city: 'San Francisco',
-      state: 'CA',
-      postcode: '94103',
-      country: 'US'
-    }
+  // const { data } = await axios.post(
+  //   'wservice.php',
+  //   {
+  //     email: correo,
+  //     password: contrasena,
+  //     exec: 'auth'
+  //   },
+  //   {
+  //     headers: {
+  //       'Content-type': 'multipart/form-data'
+  //     }
+  //   }
+  // )
+  const user = {
+    ID: '3',
+    user_login: 'Luis',
+    user_email: 'luisg@mobkii.com',
+    user_pass: '$P$ByMtvu2gLcNEU3hv.wSlCxHSG8V1O3.',
+    user_nicename: 'luis',
+    user_pass: '$P$ByMtvu2gLcNEU3hv.wSlCxHSG8V1O3.',
+    user_registered: '2018-03-06 16:16:22',
+    user_status: '0',
+    user_url: ''
   }
-  const result = await request(`customers`, data)
-  console.log(result)
-  // dispatch({
-  //   type: INICIAR_SESION,
-  //   payload: { id: categoria, data: result }
-  // })
+
+  // data.status === 202 && dispatch({ type: INICIAR_SESION, payload: data.data })
+  dispatch({ type: INICIAR_SESION, payload: user })
+  return 202
 }
 
 const isError = () => dispatch => {

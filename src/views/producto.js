@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getProducto, getVariaciones } from '../actions/productos_actions'
 import { agregarProducto } from '../actions/carrito_actions'
 import { LoadingCard } from '../components'
-import { Tag, Button, Icon, Layout, Carousel, Row, Col } from 'antd'
+import { Tag, Carousel, Button, Icon, Layout, message, Row, Col } from 'antd'
 const { Footer } = Layout
 
 class Producto extends Component {
@@ -26,26 +26,10 @@ class Producto extends Component {
     alert('Hubo un error intesperado, por favor vuelve a recargar la página')
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   const { productos } = newProps
-  //   console.log('productos', productos)
-  //   let producto
-  //   producto =
-  //     productos.length > 0
-  //       ? productos.find(producto => producto.id === this.props.match.params.id)
-  //       : this.props.getProducto(this.props.match.params.id)
-
-  //   this.setState({ producto })
-  // }
-
-  // componentWillUpdate(newProps) {
-  //   Number(newProps.match.params.id) !== newProps.seleccionado.id &&
-  //     this.props.getProducto(newProps.match.params.id)
-  // }
-
   agregarProducto(producto) {
     producto.cantidad = 1
     this.props.agregarProducto(producto)
+    message.success('Producto agregado', 1)
   }
 
   renderCategorias() {

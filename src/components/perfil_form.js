@@ -16,10 +16,15 @@ class PerfilForm extends Component {
   componentWillMount() {
     const { usuario } = this.props
     usuario
-      ? this.setState({ uid: usuario.uid, titulo: 'Guardar perfil' })
+      ? this.setState({ uid: usuario.ID, titulo: 'Guardar perfil' })
       : this.setState({
           titulo: 'Registrarme',
-          usuario: { nombre: '', celular: '', correo: '', contrasena: '' }
+          usuario: {
+            user_login: '',
+            user_phone: '',
+            user_email: '',
+            user_pass: ''
+          }
         })
   }
 
@@ -51,13 +56,7 @@ class PerfilForm extends Component {
 
   render() {
     const { usuario } = this.props.usuario ? this.props : this.state
-    // return !this.state.uid ? (
-    //   <Row type="flex" align="middle" justify="center">
-    //     <Col span={24}>
-    //       <Icon type="loading" />
-    //     </Col>
-    //   </Row>
-    // ) : (
+    console.log(usuario)
     return (
       <Formsy
         onValidSubmit={this.submit}
@@ -65,42 +64,32 @@ class PerfilForm extends Component {
         onInvalid={this.disableButton}
       >
         <Minput
-          name="nombre"
+          name="user_login"
           placeholder="Nombre"
           type="text"
           icon="user"
-          validations="minLength:6"
-          value={usuario.nombre}
-          validationError="Ingresa un nombre de mínimo 6 caracteres"
+          validations="minLength:1"
+          value={usuario.user_login}
+          validationError="Ingresa un nombre válido"
           required
         />
         <Minput
-          name="celular"
-          placeholder="Celular"
-          type="text"
-          icon="mobile"
-          validations={{ minLength: 10, maxLength: 10 }}
-          value={usuario.celular}
-          validationError="Ingresa un número de teléfono válido"
-          required
-        />
-        <Minput
-          name="correo"
+          name="user_email"
           placeholder="Correo"
           type="email"
           icon="mail"
           validations="isEmail"
-          value={usuario.correo}
+          value={usuario.user_email}
           validationError="Ingresa un correo electrónico válido"
           required
         />
         <Minput
-          name="contrasena"
+          name="user_pass"
           placeholder="Contraseña"
           type="password"
           icon="unlock"
           validations="minLength:6"
-          value={usuario.contrasena}
+          value={usuario.user_pass}
           validationError="Ingresa una contraseña de más de 6 dígitos"
           required
         />
@@ -109,8 +98,8 @@ class PerfilForm extends Component {
           placeholder="Confirmar"
           type="password"
           icon="lock"
-          validations="equalsField:contrasena"
-          value={usuario.contrasena}
+          validations="equalsField:user_pass"
+          value={usuario.user_pass}
           validationError="Las contraseñas no coinciden"
           required
         />

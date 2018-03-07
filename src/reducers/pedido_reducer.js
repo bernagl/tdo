@@ -10,7 +10,6 @@ export default function(state = INITIAL_STATE, action) {
     case GET_PEDIDO:
       return { ...state, seleccionado: action.payload }
     case GET_PEDIDOS:
-      console.log(action)
       return { ...state, data: action.payload }
     default:
       return state

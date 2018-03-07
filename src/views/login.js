@@ -26,11 +26,15 @@ class Login extends Component {
     this.setState({ loading: true })
     console.log(model)
     const response = await this.props.login(model)
-    if (response) this.props.history.push('/')
-    else {
-      message.error('Usuario o contraseña incorrectos')
-      this.setState({ loading: false })
-    }
+    console.log(response)
+    response === 404 &&
+      (message.error('Usuario o contraseña incorrectos'),
+      this.setState({ loading: false }))
+    // if (response) this.props.history.push('/')
+    // else {
+    //   message.error('Usuario o contraseña incorrectos')
+    //   this.setState({ loading: false })
+    // }
   }
 
   disableButton() {

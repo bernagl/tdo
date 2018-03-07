@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Formsy from 'formsy-react'
 import { setDireccion } from '../actions/direccion_actions'
-import { Button, Col, Icon, message, Row } from 'antd'
+import { Button, Col, Divider, Icon, message, Row } from 'antd'
 import { Minput, Mselect } from '../components'
 
 class DireccionForm extends Component {
@@ -16,20 +16,27 @@ class DireccionForm extends Component {
       canSubmit: false,
       loading: false,
       direccion: {
-        calle: '',
+        user_login: '',
+        last_name: '',
+        user_email: '',
+        user_phone: '',
+        address_1: '',
         numero: '',
         colonia: '',
-        cp: '',
-        ciudad: '',
-        estado: ''
+        postcode: '',
+        city: '',
+        state: ''
       }
     }
   }
 
   componentDidMount() {
-    const { direccion } = this.props
-    console.log(direccion)
-    direccion && this.setState({ direccion: { ...direccion } })
+    const { auth, direccion } = this.props
+    direccion
+      ? this.setState({ direccion: { ...direccion } })
+      : this.setState({
+          direccion: { first_name: auth.user_login, email: auth.email }
+        })
   }
 
   disableButton() {
@@ -42,8 +49,7 @@ class DireccionForm extends Component {
 
   async submit(model) {
     const { props } = this
-    model.uid = props.uid
-    model.id = props.id
+    console.log(model)
     this.setState({ loading: true })
     const response = await props.setDireccion(model)
     // const response = await (props.id
@@ -68,21 +74,59 @@ class DireccionForm extends Component {
     const { direccion } = this.props.id ? this.props : this.state
     return (
       <div className="row">
-        <div className="col-xs-12">
-          <h4>Dirección de envío</h4>
-        </div>
+        {/* <div className="col-xs-12">
+          <h2>Detalles del envío</h2>
+        </div> */}
         <div className="col-xs-12">
           <Formsy
             onValidSubmit={this.submit}
             onValid={this.enableButton}
             onInvalid={this.disableButton}
           >
+            <Divider>Información</Divider>
+            <Minput
+              placeholder="Nombre"
+              name="first_name"
+              type="text"
+              validations="minLength:2"
+              value={direccion.first_name || ''}
+              validationError="Ingresa un nombre válido"
+              required
+            />
+            <Minput
+              placeholder="Apellidos"
+              name="last_name"
+              type="text"
+              validations="minLength:2"
+              value={direccion.last_name || ''}
+              validationError="Ingresa un apellido válido"
+              required
+            />
+            <Minput
+              placeholder="Correo"
+              name="email"
+              type="text"
+              validations="isEmail"
+              value={direccion.email || ''}
+              validationError="Ingresa un correo válido"
+              required
+            />
+            <Minput
+              placeholder="Teléfono"
+              name="phone"
+              type="text"
+              validations="minLength:10"
+              value={direccion.phone || ''}
+              validationError="Ingresa un teléfono válido"
+              required
+            />
+            <Divider>Dirección</Divider>
             <Minput
               placeholder="Calle"
-              name="calle"
+              name="address_1"
               type="text"
               validations="minLength:6"
-              value={direccion.calle || ''}
+              value={direccion.address_1 || ''}
               validationError="Ingresa una calle de mínimo 6 caracteres"
               required
             />
@@ -106,28 +150,28 @@ class DireccionForm extends Component {
             />
             <Minput
               placeholder="Código postal"
-              name="cp"
+              name="postcode"
               type="text"
               validations="minLength:2"
-              value={direccion.cp || ''}
+              value={direccion.postcode || ''}
               validationError="Ingresa una código postal válida"
               required
             />
             <Minput
               placeholder="Ciudad"
-              name="ciudad"
+              name="city"
               type="text"
               validations="minLength:2"
-              value={direccion.ciudad || ''}
+              value={direccion.city || ''}
               validationError="Ingresa una ciudad válida"
               required
             />
 
             <Mselect
               placeholder="Estado"
-              name="estado"
+              name="state"
               type="text"
-              value={direccion.estado || ''}
+              value={direccion.state || ''}
               validationError="Ingresa un estado válido"
               required
             />
@@ -147,8 +191,8 @@ class DireccionForm extends Component {
   }
 }
 
-function mapDispatchToProps({ direccion }) {
-  return { direccion }
+function mapDispatchToProps({ auth, direccion }) {
+  return { auth, direccion }
 }
 
 export default withRouter(

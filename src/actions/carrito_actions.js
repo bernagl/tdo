@@ -33,12 +33,12 @@ export const purgeCarrito = () => dispatch => {
   dispatch({ type: PURGE })
 }
 
-export const enviarPedido = data => async dispatch => {
-  const result = await WooCommerce.postAsync('orders', data.pedido)
+export const enviarPedido = ({ pedido, uid }) => async dispatch => {
+  console.log(uid, pedido)
+  const result = await WooCommerce.postAsync(
+    `orders?customer_id=${uid}`,
+    pedido
+  )
   const order = JSON.parse(result.toJSON().body)
-  return firebase
-    .database()
-    .ref(`pedidos/${data.uid}`)
-    .push(order)
-    .then(response => result)
+  return order
 }

@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     const { auth, error } = this.props
     return !error ? (
-      !auth ? (
+      auth ? (
         <div id="outer-container">
           <Sidebar />
           <Layout id="page-wrap">

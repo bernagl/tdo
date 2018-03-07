@@ -7,14 +7,6 @@ import { agregarProducto } from '../actions/carrito_actions'
 const { Meta } = Card
 
 class Producto extends Component {
-  // state = { height: 0 }
-
-  // componentDidMount() {
-  //   const height = this.divElement.clientHeight;
-  //   console.log(height)
-  //   this.setState({ height });
-  // }
-
   formatearPrecio(precio) {
     return Number(precio)
       .toFixed(2)
@@ -26,7 +18,7 @@ class Producto extends Component {
     const { producto } = this.props
     producto.cantidad = 1
     this.props.agregarProducto(producto)
-    message.success('Producto agregado')
+    message.success('Producto agregado', 1)
   }
 
   render() {

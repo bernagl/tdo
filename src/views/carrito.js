@@ -1,23 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  Form,
-  Icon,
-  Input,
-  Layout,
-  message,
-  Radio,
-  Row,
-  Col
-} from 'antd'
+import { Button, Divider, Icon, Layout, message, Row, Col } from 'antd'
 import { CarritoItem, DireccionForm } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
-import { getDirecciones } from '../actions/perfil_actions'
 import empty_cart from '../empty_cart.png'
+
 const { Footer } = Layout
-const { Group } = Radio
 
 class Carrito extends Component {
   constructor(props) {
@@ -38,8 +27,6 @@ class Carrito extends Component {
   componentDidMount() {
     const { paso } = this.props.match.params
     this.getTotal(this.props.carrito)
-    // this.props.getDirecciones(this.props.auth.uid)
-    this.props.getDirecciones(this.props.auth)
     paso && this.setState({ paso: Number(paso) })
   }
 
@@ -69,96 +56,47 @@ class Carrito extends Component {
 
   async enviarPedido() {
     let productos = []
-    for (const producto in this.props.carrito) {
+    const {
+      auth,
+      carrito,
+      direccion,
+      enviarPedido,
+      history,
+      vaciarCarrito
+    } = this.props
+
+    for (const producto in carrito) {
       productos.push({
         product_id: producto,
-        quantity: this.props.carrito[producto].cantidad
+        quantity: carrito[producto].cantidad
       })
     }
-    const billing = this.props.direccion.direcciones[this.state.direccion]
-    const usuario = this.props.auth
-    const direccion = {
-      first_name: usuario.nombre,
-      last_name: usuario.apellido,
-      address_1: billing.calle,
-      address_2: '',
-      city: billing.ciudad,
-      state: billing.estado,
-      postcode: billing.cp,
-      country: 'MX',
-      email: usuario.correo,
-      phone: usuario.telefon
+    const envioInfo = {
+      ...direccion,
+      address_1: `${direccion.address_1}, ${direccion.numero}, Col. ${
+        direccion.colonia
+      }`,
+      country: 'MX'
     }
     const pedido = {
-      billing: direccion,
-      shipping: direccion,
+      billing: envioInfo,
+      shipping: envioInfo,
       line_items: productos
     }
     this.setState({ status: 'loading', titulo: 'Enviando pedido' })
-    const result = await this.props.enviarPedido({
-      uid: this.props.auth.uid,
-      pedido
-    })
+    const result = await enviarPedido({ uid: auth.ID, pedido })
     if (result) {
-      const body = JSON.parse(result.body)
+      console.log(result)
       this.setState({ status: 'check-circle' })
-      this.props.vaciarCarrito()
-      message.success(`Tu pedido se ha creado con el id #${body.id}`, 2)
-      this.props.history.push(`/pedido/${body.id}`)
+      vaciarCarrito()
+      message.success(`Tu pedido se ha creado con el id #${result.id}`, 2)
     }
-  }
-
-  handleDireccion = e => {
-    this.setState({
-      direccion: e.target.value
-    })
   }
 
   formatearPrecio(precio) {
     return Number(precio)
       .toFixed(2)
       .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-  }
-
-  renderDirecciones() {
-    const radioStyle = {
-      display: 'block',
-      height: '30px',
-      lineHeight: '30px'
-    }
-
-    return this.props.direccion.direcciones.map((direccion, key) => {
-      return (
-        <Radio style={radioStyle} value={key} key={direccion.id}>
-          {direccion.calle} {direccion.numero}, {direccion.estado}
-        </Radio>
-      )
-    })
-  }
-
-  renderUsuarioInfo() {
-    const { shipping } = this.state
-    return (
-      <React.Fragment>
-        <Form.Item label="Nombre:">
-          <Input
-            defaultValue={`${shipping.first_name} ${shipping.last_name}`}
-          />
-        </Form.Item>
-        <Form.Item label="Dirección:">
-          <Input defaultValue={shipping.address_1} />
-        </Form.Item>
-        <Form.Item label="Ciudad:">
-          <Input defaultValue={shipping.city} />
-        </Form.Item>
-        <Form.Item label="Estado:">
-          <Input defaultValue={shipping.state} />
-        </Form.Item>
-        <Form.Item label="Código postal:">
-          <Input defaultValue={shipping.postcode} />
-        </Form.Item>
-      </React.Fragment>
-    )
   }
 
   siguiente() {
@@ -172,7 +110,6 @@ class Carrito extends Component {
   }
 
   render() {
-    const { direcciones } = this.props.direccion
     console.log(this.props)
     if (Object.keys(this.props.carrito).length > 0) {
       return (
@@ -248,6 +185,5 @@ function mapDispatchToProps({ auth, carrito, direccion }) {
 
 export default connect(mapDispatchToProps, {
   enviarPedido,
-  getDirecciones,
   vaciarCarrito
 })(Carrito)

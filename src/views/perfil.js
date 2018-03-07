@@ -46,7 +46,7 @@ class Perfil extends Component {
                   </Col>
                 </Row>
               </TabPane>
-              <TabPane
+              {/* <TabPane
                 tab={
                   <span>
                     <Icon type="home" />Dirección
@@ -55,7 +55,7 @@ class Perfil extends Component {
                 key="2"
               >
                 <Direcciones uid={this.props.auth.uid} view="perfil" />
-              </TabPane>
+              </TabPane> */}
               <TabPane
                 tab={
                   <span>
@@ -64,7 +64,7 @@ class Perfil extends Component {
                 }
                 key="3"
               >
-                <PedidoList uid={this.props.auth.uid} />
+                <PedidoList uid={this.props.auth.ID} />
               </TabPane>
             </Tabs>
           </Col>
