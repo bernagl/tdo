@@ -90,6 +90,7 @@ class Carrito extends Component {
       this.setState({ status: 'check-circle' })
       vaciarCarrito()
       message.success(`Tu pedido se ha creado con el id #${result.id}`, 2)
+      this.props.history.push(`/pedido/${result.id}`)
     }
   }
 
