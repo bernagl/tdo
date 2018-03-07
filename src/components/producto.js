@@ -4,13 +4,25 @@ import { Link } from 'react-router-dom'
 import { Button, Card, message } from 'antd'
 import { connect } from 'react-redux'
 import { agregarProducto } from '../actions/carrito_actions'
+import { setImgHeight } from '../actions/general_actions'
 const { Meta } = Card
 
 class Producto extends Component {
+  state = { height: '65%' }
+
   formatearPrecio(precio) {
     return Number(precio)
       .toFixed(2)
       .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  }
+
+  componentDidMount() {
+    const { id, imgHeight, setImgHeight } = this.props
+    setTimeout(() => {
+      const height = document.getElementById(`card-${id}`).clientHeight
+      // this.setState({ height })
+      height && height !== '65%' ? setImgHeight(height) : setImgHeight('65%')
+    }, 1000)
   }
 
   agregarProducto = e => {
@@ -22,7 +34,7 @@ class Producto extends Component {
   }
 
   render() {
-    const { link, producto } = this.props
+    const { id, imgHeight, link, producto } = this.props
     const productoItem = (
       <Card
         className="product-card-item"
@@ -31,8 +43,7 @@ class Producto extends Component {
           <img
             alt={producto.name}
             src={producto.images[0].src}
-            ref={divElement => (this.divElement = divElement)}
-            id={`producto-${this.props.producto.id}`}
+            id={`card-${id}`}
           />
         }
       >
@@ -45,7 +56,9 @@ class Producto extends Component {
           shape="circle"
           className="producto-btn-cart"
           onClick={this.agregarProducto}
-          // style={{ top: this.state.height - 19 }}
+          style={{
+            top: Number(imgHeight) ? imgHeight - 20 : imgHeight
+          }}
         />
       </Card>
     )
@@ -68,4 +81,8 @@ class Producto extends Component {
   }
 }
 
-export default connect(null, { agregarProducto })(Producto)
+const mapDispatchToProps = ({ general: { imgHeight } }) => ({ imgHeight })
+
+export default connect(mapDispatchToProps, { agregarProducto, setImgHeight })(
+  Producto
+)

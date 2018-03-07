@@ -12,6 +12,7 @@ const config = {
     'carrito',
     'categorias',
     'direccion',
+    'general',
     'pedido',
     'productos'
   ]

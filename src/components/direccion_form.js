@@ -16,9 +16,9 @@ class DireccionForm extends Component {
       canSubmit: false,
       loading: false,
       direccion: {
-        user_login: '',
+        first_name: '',
         last_name: '',
-        user_email: '',
+        email: '',
         user_phone: '',
         address_1: '',
         numero: '',
@@ -32,10 +32,10 @@ class DireccionForm extends Component {
 
   componentDidMount() {
     const { auth, direccion } = this.props
-    direccion
+    Object.keys(direccion.direccion).length > 0
       ? this.setState({ direccion: { ...direccion } })
       : this.setState({
-          direccion: { first_name: auth.user_login, email: auth.email }
+          direccion: { first_name: auth.user_login, email: auth.user_email }
         })
   }
 
@@ -49,7 +49,6 @@ class DireccionForm extends Component {
 
   async submit(model) {
     const { props } = this
-    console.log(model)
     this.setState({ loading: true })
     const response = await props.setDireccion(model)
     // const response = await (props.id
@@ -71,7 +70,9 @@ class DireccionForm extends Component {
   }
 
   render() {
-    const { direccion } = this.props.id ? this.props : this.state
+    const { direccion } = this.state
+    console.log(direccion)
+    console.log('direccion', direccion)
     return (
       <div className="row">
         {/* <div className="col-xs-12">

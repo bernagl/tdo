@@ -24,7 +24,7 @@ class Inicio extends Component {
 
     for (const producto in data) {
       productos.push(
-        <Producto producto={data[producto]} link key={data[producto].id} />
+        <Producto producto={data[producto]} link key={data[producto].id} id={data[producto].id} />
       )
     }
 
