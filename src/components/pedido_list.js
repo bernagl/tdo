@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Col, List, Row } from 'antd'
+import { Col, List, message, Row } from 'antd'
 import { connect } from 'react-redux'
 import { getPedidos } from '../actions/pedido_actions'
 
@@ -8,10 +8,14 @@ class PedidoList extends Component {
   constructor(props) {
     super(props)
     this.renderPedidos = this.renderPedidos.bind(this)
+    this.state = { loading: true }
   }
 
-  componentDidMount() {
-    this.props.getPedidos(this.props.uid)
+  async componentDidMount() {
+    message.loading('Verificando si hay nuevos pedidos', 10000)
+    const response = await this.props.getPedidos(this.props.uid)
+    message.destroy()
+    console.log(response)
   }
 
   renderPedidos() {

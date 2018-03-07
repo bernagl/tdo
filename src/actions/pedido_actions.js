@@ -3,10 +3,9 @@ import WooCommerce from './woocommerce'
 import { GET_PEDIDO, GET_PEDIDOS, IS_ERROR } from './types'
 
 export const getPedidos = uid => async dispatch => {
-  console.log(uid)
   const data = await request(`orders?customer=${uid}`)
-  console.log(data)
   dispatch({ type: GET_PEDIDOS, payload: data })
+  return data
 }
 
 export const getPedido = id => async dispatch => {
