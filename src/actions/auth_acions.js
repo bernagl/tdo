@@ -86,10 +86,5 @@ export const registro = usuario => async dispatch => {
 }
 
 export const cerrarSesion = () => dispatch => {
-  firebase
-    .auth()
-    .signOut()
-    .then(resul => {
-      dispatch({ type: CERRAR_SESION })
-    })
+  dispatch({ type: CERRAR_SESION })
 }

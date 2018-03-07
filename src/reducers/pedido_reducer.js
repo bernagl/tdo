@@ -11,6 +11,8 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, seleccionado: action.payload }
     case GET_PEDIDOS:
       return { ...state, data: action.payload }
+    case 'vaciar_pedidos':
+      return INITIAL_STATE
     default:
       return state
   }

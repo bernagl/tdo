@@ -19,6 +19,10 @@ const isError = () => dispatch => {
   dispatch({ type: IS_ERROR, payload: true })
 }
 
+export const vaciarPedidos = () => dispatch => {
+  dispatch({ type: 'vaciar_pedidos' })
+}
+
 const request = async url => {
   try {
     const data = await WooCommerce.getAsync(url)

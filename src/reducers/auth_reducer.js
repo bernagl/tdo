@@ -3,7 +3,6 @@ import {
   ACTUALIZAR_PERFIL,
   CERRAR_SESION
 } from '../actions/types'
-import { REHYDRATE, PURGE } from 'redux-persist'
 
 export default function(state = null, action) {
   switch (action.type) {
@@ -18,8 +17,6 @@ export default function(state = null, action) {
     //     return action.payload.auth
     //   }
     //   return {}
-    // case PURGE:
-      return {}
     default:
       return state
   }

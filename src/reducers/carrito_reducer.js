@@ -4,7 +4,7 @@ import {
   RESTAR_PRODUCTO,
   VACIAR_CARRITO
 } from '../actions/types'
-import { REHYDRATE, PURGE } from 'redux-persist'
+import { PURGE } from 'redux-persist'
 import _ from 'lodash'
 let producto
 
@@ -49,10 +49,10 @@ export default function(state = {}, action) {
     //     return action.payload.carrito
     //   }
     //   return {}
-    // case PURGE:
-    //   return {}
+    case PURGE:
+      return {}
     case VACIAR_CARRITO:
-      return []
+      return {}
     default:
       return state
   }

@@ -4,7 +4,7 @@ import {
   ACTUALIZAR_DIRECCION,
   SET_DIRECCION
 } from '../actions/types'
-// import { REHYDRATE, PURGE } from 'redux-persist'
+import { PURGE } from 'redux-persist'
 const INITIAL_STATE = {
   direcciones: [],
   direccion: {}
@@ -24,8 +24,8 @@ export default function(state = false, action) {
     //   return action.payload.auth || {}
     // // }
     // // return {}
-    // case PURGE:
-    //   return {}
+    case 'vaciar_direccion':
+      return INITIAL_STATE
     default:
       return state
   }

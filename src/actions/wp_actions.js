@@ -20,9 +20,8 @@ export const login = ({ correo, contrasena }) => async dispatch => {
     ID: '3',
     user_login: 'Luis',
     user_email: 'luisg@mobkii.com',
-    user_pass: '$P$ByMtvu2gLcNEU3hv.wSlCxHSG8V1O3.',
+    user_pass: '^#fIOMW6ULmoa4N2D^lP@W29',
     user_nicename: 'luis',
-    user_pass: '$P$ByMtvu2gLcNEU3hv.wSlCxHSG8V1O3.',
     user_registered: '2018-03-06 16:16:22',
     user_status: '0',
     user_url: ''
