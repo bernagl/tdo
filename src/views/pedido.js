@@ -21,18 +21,22 @@ class Pedido extends Component {
         <List.Item key={producto.id}>
           <Link to={`/producto/${producto.product_id}`}>
             <span>{`${producto.name} `}</span>{' '}
-            <span style={{ color: 'lightgray' }}> | </span>
-            <span>{`${producto.quantity} x $${producto.price}`}</span>
           </Link>
+          <Divider type="vertical" />
+          <span>{`${producto.quantity} x $${producto.price}`}</span>
         </List.Item>
       )
     })
   }
 
   render() {
-    const { seleccionado } = this.props.pedido
+    const { match, pedido } = this.props
+    let seleccionado = pedido.data.find(
+      pedido => pedido.id === +match.params.id
+    )
+    !seleccionado && pedido.seleccionado
     return Object.keys(seleccionado).length > 0 &&
-      seleccionado.id === Number(this.props.match.params.id) ? (
+      seleccionado.id === Number(match.params.id) ? (
       <div className="pedido">
         <Row>
           <Col span={24}>
@@ -51,11 +55,13 @@ class Pedido extends Component {
               }`}
             </span>
             <br />
-            <span>{`Dirección: ${seleccionado.shipping.address_1}, ${
-              seleccionado.shipping.city
-            }, ${seleccionado.shipping.state}, ${
-              seleccionado.shipping.postcode
-            }`}</span>
+            <span>
+              {`Dirección: ${seleccionado.shipping.address_1}`}
+              <br />
+              {`${seleccionado.shipping.city}, ${
+                seleccionado.shipping.state
+              }, ${seleccionado.shipping.postcode}`}
+            </span>
           </Col>
           <Col span={24}>
             <Divider>Productos</Divider>

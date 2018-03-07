@@ -14,7 +14,7 @@ class Inicio extends Component {
   }
 
   componentDidMount() {
-    this.props.getProductosDestacados()
+    // this.props.getProductosDestacados()
     this.props.getProductos()
   }
 

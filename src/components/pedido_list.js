@@ -12,7 +12,7 @@ class PedidoList extends Component {
   }
 
   async componentDidMount() {
-    message.loading('Verificando si hay nuevos pedidos', 10000)
+    message.loading('Verificando nuevos pedidos', 10000)
     const response = await this.props.getPedidos(this.props.uid)
     message.destroy()
     console.log(response)
