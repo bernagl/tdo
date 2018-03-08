@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Aplicacion, Routes } from './router'
 import { checkSession } from './actions/auth_acions'
+import { search } from './actions/general_actions'
 import { connect } from 'react-redux'
-import { Button, Layout, Modal } from 'antd'
-import { Sidebar, Carrito } from './components'
+import { Button, Input, Layout, Modal } from 'antd'
+import { BreadCrumb, Carrito, Sidebar } from './components'
 import logo from './assets/td.png'
 import './App.css'
 
+const { Search } = Input
 const { Header, Content } = Layout
 
 class App extends Component {
   state = { error: false }
 
   render() {
-    const { auth, error } = this.props
+    const { auth, error, history, location } = this.props
     return !error ? (
       auth ? (
         <div id="outer-container">
@@ -38,7 +40,8 @@ class App extends Component {
               </h2> */}
               </Link>
             </Header>
-            <Content style={{ margin: '10px' }}>
+
+            <Content style={{ margin: '0px 10px 10px 10px' }}>
               <Aplicacion />
             </Content>
           </Layout>
@@ -66,5 +69,7 @@ function mapDispatchToProps({ auth, general: { error } }) {
   return { auth, error }
 }
 
-export default withRouter(connect(mapDispatchToProps, { checkSession })(App))
+export default withRouter(
+  connect(mapDispatchToProps, { checkSession, search })(App)
+)
 // export default App

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getProducto, getVariaciones } from '../actions/productos_actions'
 import { agregarProducto } from '../actions/carrito_actions'
-import { LoadingCard } from '../components'
+import { BreadCrumb, LoadingCard } from '../components'
 import { Tag, Carousel, Button, Icon, Layout, message, Row, Col } from 'antd'
 const { Footer } = Layout
 
@@ -91,8 +91,13 @@ class Producto extends Component {
 
   render() {
     console.log(this.props)
+    console.log(urls)
     const { match, productos, getProducto } = this.props
     const producto = productos[match.params.id]
+    const urls = [
+      { name: 'Inicio', path: '/', icon: 'home' },
+      { name: 'Producto', path: match.url }
+    ]
     producto &&
       (producto.description = producto.description
         .replace('<p>', '')
@@ -102,6 +107,7 @@ class Producto extends Component {
       <LoadingCard cantidad={1} />
     ) : (
       <div>
+        <BreadCrumb urls={urls} />
         <Row className="producto-main-row">
           <Col span={24}>
             {producto.images.length > 1 ? (

@@ -1,23 +1,25 @@
 import React from 'react'
-import { Breadcrumb, Icon } from 'antd'
+import { Breadcrumb, Divider, Icon } from 'antd'
 import { Link } from 'react-router-dom'
 
-export default () => {
+export default ({ urls }) => {
+  console.log(urls)
   return (
-    <Breadcrumb>
-      <Breadcrumb.Item href="">
-        <Link to="/">
-          <Icon type="home" />
-          <span>Inicio</span>
-        </Link>
-      </Breadcrumb.Item>
-      <Breadcrumb.Item href="">
-        <Link to={`/categoria/${categoria.id}`}>
-          <Icon type="o-tag" />
-          <span>{categoria.nombre}</span>
-        </Link>
-      </Breadcrumb.Item>
-      <Breadcrumb.Item>Application</Breadcrumb.Item>
+    <Breadcrumb style={{ margin: '10px 0px' }}>
+      {urls.map((url, key) => {
+        return (
+          <Breadcrumb.Item key={key}>
+            <Link to={url.path}>
+              {url.icon && <Icon type={url.icon} />}
+              <span> {url.name}</span>
+            </Link>
+          </Breadcrumb.Item>
+        )
+      })}
     </Breadcrumb>
   )
+}
+
+const styles = {
+  marginVertical: 10
 }

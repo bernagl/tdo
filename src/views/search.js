@@ -4,10 +4,11 @@ import {
   getProductos,
   getProductosDestacados
 } from '../actions/productos_actions'
-import { LoadingCard } from '../components'
-import { InputSearch, Producto } from '../components'
+import { InputSearch, LoadingCard } from '../components'
+import { Producto } from '../components'
+import empty_cart from '../empty_cart.png'
 
-class Inicio extends Component {
+class Search extends Component {
   constructor(props) {
     super(props)
     this.renderProducto = this.renderProducto.bind(this)
@@ -20,29 +21,38 @@ class Inicio extends Component {
 
   renderProducto(columna) {
     const { data } = this.props.productos
+    const { search } = this.props.match.params
     const productos = []
-
     for (const producto in data) {
-      productos.push(
-        <Producto
-          producto={data[producto]}
-          link
-          key={data[producto].id}
-          id={data[producto].id}
-        />
-      )
+      data[producto].name.toLowerCase().includes(search.toLowerCase()) &&
+        productos.push(
+          <Producto
+            producto={data[producto]}
+            link
+            key={data[producto].id}
+            id={data[producto].id}
+          />
+        )
     }
 
-    return productos
+    return productos.length > 0 ? (
+      productos
+    ) : (
+      <img src={empty_cart} style={{ width: '100%' }} alt="" />
+    )
+
+    // return (
+    //   productos || <img src={empty_cart} style={{ width: '100%' }} alt="" />
+    // )
   }
 
   render() {
-    if (Object.keys(this.props.productos.data).length <= 0) {
-      return <LoadingCard cantidad={5} />
-    }
     return (
       <div className="row">
         <InputSearch history={this.props.history} />
+        <div className="col-xs-12">
+          <h4>Resultados para: {this.props.match.params.search}</h4>
+        </div>
         {this.renderProducto()}
       </div>
     )
@@ -56,4 +66,4 @@ function mapDispatchToProps({ productos, categorias }) {
 export default connect(mapDispatchToProps, {
   getProductos,
   getProductosDestacados
-})(Inicio)
+})(Search)

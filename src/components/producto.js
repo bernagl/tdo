@@ -19,9 +19,13 @@ class Producto extends Component {
   componentDidMount() {
     const { id, imgHeight, setImgHeight } = this.props
     setTimeout(() => {
-      const height = document.getElementById(`card-${id}`).clientHeight
-      // this.setState({ height })
-      height && height !== '65%' ? setImgHeight(height) : setImgHeight('65%')
+      try {
+        const height = document.getElementById(`card-${id}`).clientHeight
+        // this.setState({ height })
+        height && height !== '65%' ? setImgHeight(height) : setImgHeight('65%')
+      } catch (e) {
+        console.log(e)
+      }
     }, 1000)
   }
 

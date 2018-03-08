@@ -12,12 +12,14 @@ import {
   Pedido,
   Producto,
   Prueba,
+  Search,
   Registro
 } from '../views'
 
 export const Aplicacion = () => {
   return (
     <Switch>
+      <Route path="/busqueda/:search" component={Search} />
       <Route path="/producto/:id" component={Producto} />
       <Route path="/categoria/:id" component={Categoria} />
       <Route path="/categorias" component={Categorias} />

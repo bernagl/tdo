@@ -41,14 +41,19 @@
   padding-left: 0px !important;
 }
 .carrito-icon {
-  float: left;
-  margin-left: -15px;
+  /* float: right;
+  margin-left: -15px; */
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 40px;
+  /* top: 20px; */
 }
 .bm-burger-button {
   position: absolute;
   width: 20px;
   height: 20px;
-  right: 10px;
+  left: 10px;
   top: 20px;
 }
 

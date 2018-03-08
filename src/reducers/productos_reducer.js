@@ -3,7 +3,8 @@ import {
   GET_PRODUCTOS_DESTACADOS,
   GET_PRODUCTO,
   GET_PRODUCTOS,
-  GET_VARIACIONES
+  GET_VARIACIONES,
+  SEARCH
 } from '../actions/types'
 import { REHYDRATE, PURGE } from 'redux-persist'
 
@@ -13,7 +14,8 @@ const INITIAL_STATE = {
   categoria: [],
   variaciones: { id: '', data: [] },
   categoria_seleccionada: 0,
-  seleccionado: {}
+  seleccionado: {},
+  search: ''
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -42,12 +44,14 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         variaciones: { id, data }
       }
-    // case REHYDRATE:
-    //   if (action.payload) {
-    //     return action.payload.productos
-    //   }
-    //   return state
-    // case PURGE:
+    case SEARCH:
+      return { ...state, search: action.payload }
+      // case REHYDRATE:
+      //   if (action.payload) {
+      //     return action.payload.productos
+      //   }
+      //   return state
+      // case PURGE:
       return {}
     default:
       return state

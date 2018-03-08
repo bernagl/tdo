@@ -10,6 +10,7 @@ import Perfil from './perfil'
 import Registro from './registro'
 import Pedido from './pedido'
 import Prueba from './prueba'
+import Search from './search'
 
 export {
   Carrito,
@@ -23,5 +24,6 @@ export {
   Registro,
   Pedido,
   Producto,
-  Prueba
+  Prueba,
+  Search
 }
