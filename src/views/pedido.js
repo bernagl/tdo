@@ -15,8 +15,8 @@ class Pedido extends Component {
     this.props.getPedido(this.props.match.params.id)
   }
 
-  renderProductos() {
-    return this.props.pedido.seleccionado.line_items.map(producto => {
+  renderProductos(pedido) {
+    return pedido.line_items.map(producto => {
       return (
         <List.Item key={producto.id}>
           <Link to={`/producto/${producto.product_id}`}>
@@ -34,7 +34,7 @@ class Pedido extends Component {
     let seleccionado = pedido.data.find(
       pedido => pedido.id === +match.params.id
     )
-    !seleccionado && pedido.seleccionado
+    !seleccionado && (seleccionado = pedido.seleccionado)
     return Object.keys(seleccionado).length > 0 &&
       seleccionado.id === Number(match.params.id) ? (
       <div className="pedido">
@@ -65,7 +65,7 @@ class Pedido extends Component {
           </Col>
           <Col span={24}>
             <Divider>Productos</Divider>
-            <List size="small">{this.renderProductos()}</List>
+            <List size="small">{this.renderProductos(seleccionado)}</List>
           </Col>
         </Row>
       </div>

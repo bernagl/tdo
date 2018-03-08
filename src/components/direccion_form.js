@@ -32,11 +32,12 @@ class DireccionForm extends Component {
 
   componentDidMount() {
     const { auth, direccion } = this.props
-    Object.keys(direccion.direccion).length > 0
+    direccion
       ? this.setState({ direccion: { ...direccion } })
-      : this.setState({
+      : (this.setState({
           direccion: { first_name: auth.user_login, email: auth.user_email }
-        })
+        }),
+        this.disableButton())
   }
 
   disableButton() {
