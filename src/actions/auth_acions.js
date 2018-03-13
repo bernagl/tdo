@@ -86,5 +86,6 @@ export const checkSession = () => dispatch => {
 // }
 
 export const cerrarSesion = () => dispatch => {
+  window.postMessage('logout')
   dispatch({ type: CERRAR_SESION })
 }
