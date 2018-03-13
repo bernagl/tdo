@@ -1,5 +1,5 @@
 import React from 'react'
-import { Breadcrumb, Divider, Icon } from 'antd'
+import { Breadcrumb, Icon } from 'antd'
 import { Link } from 'react-router-dom'
 
 export default ({ urls }) => {
@@ -18,8 +18,4 @@ export default ({ urls }) => {
       })}
     </Breadcrumb>
   )
-}
-
-const styles = {
-  marginVertical: 10
 }

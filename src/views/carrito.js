@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Button, Divider, Icon, Layout, message, Row, Col } from 'antd'
+import { Button, Icon, Layout, message, Row, Col } from 'antd'
 import { CarritoItem, DireccionForm } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
 import empty_cart from '../empty_cart.png'
@@ -61,7 +60,6 @@ class Carrito extends Component {
       carrito,
       direccion,
       enviarPedido,
-      history,
       vaciarCarrito
     } = this.props
 

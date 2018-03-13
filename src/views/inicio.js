@@ -5,7 +5,7 @@ import {
   getProductosDestacados
 } from '../actions/productos_actions'
 import { LoadingCard } from '../components'
-import { InputSearch, Producto } from '../components'
+import { InputSearch, Producto, Sidebar } from '../components'
 
 class Inicio extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class Inicio extends Component {
   }
 
   componentDidMount() {
-    // this.props.getProductosDestacados()
     this.props.getProductos()
   }
 

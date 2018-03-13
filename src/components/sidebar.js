@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { push as Slider } from 'react-burger-menu'
+import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
   getCategorias,
   getProductosByCategoria
 } from '../actions/categorias_actions'
-import { Link, NavLink } from 'react-router-dom'
 import { Icon, Menu } from 'antd'
 const { SubMenu } = Menu
 
-class Sidebar extends React.Component {
+class Sidebar extends Component {
   constructor(props) {
     super(props)
     this.state = { isOpen: false }

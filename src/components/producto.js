@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Button, Card, message } from 'antd'
 import { connect } from 'react-redux'
@@ -17,7 +16,7 @@ class Producto extends Component {
   }
 
   componentDidMount() {
-    const { id, imgHeight, setImgHeight } = this.props
+    const { id, setImgHeight } = this.props
     setTimeout(() => {
       try {
         const height = document.getElementById(`card-${id}`).clientHeight

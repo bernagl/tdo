@@ -11,13 +11,12 @@ class PedidoList extends Component {
     this.state = { loading: true }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     message.destroy()
     this.setState({ marginTop: 45 })
     message.config({ top: 125 })
     message.loading('Verificando nuevos pedidos', 10000)
-    const response = await this.props.getPedidos(this.props.uid)
-    console.log('didmount')
+    this.props.getPedidos(this.props.uid)
   }
 
   componentDidUpdate() {

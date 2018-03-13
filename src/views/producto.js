@@ -48,7 +48,7 @@ class Producto extends Component {
   }
 
   renderImagenes() {
-    const { match, productos, getProducto } = this.props
+    const { match, productos } = this.props
     const producto = productos[match.params.id]
     return producto.images.map((imagen, key) => {
       return <img src={`${imagen.src}`} alt={`${imagen.name}`} key={key} />
@@ -72,7 +72,7 @@ class Producto extends Component {
           )
         } else {
           return (
-            <Tag color="#108ee9" key={key}>
+            <Tag color="#108ee9" key={key} style={{ margin: '1px 0px' }}>
               <Link to={`/producto/${producto.id}`}>
                 {producto.attributes[0].option}
               </Link>
@@ -90,8 +90,6 @@ class Producto extends Component {
   }
 
   render() {
-    console.log(this.props)
-    console.log(urls)
     const { match, productos, getProducto } = this.props
     const producto = productos[match.params.id]
     const urls = [

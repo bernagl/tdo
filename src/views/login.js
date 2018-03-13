@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Formsy from 'formsy-react'
-import { facebookLogin } from '../actions/auth_acions'
+// import { facebookLogin } from '../actions/auth_acions'
 import { login } from '../actions/wp_actions'
 import { Button, Col, Divider, Layout, message, Row } from 'antd'
 import { Minput } from '../components'
@@ -97,7 +96,7 @@ class Login extends Component {
                   </Col>
                   <Col span={11}>
                     <Button
-                      onClick={this.props.facebookLogin}
+                      // onClick={this.props.facebookLogin}
                       icon="facebook"
                       className="facebook-login--btn fw"
                     />
@@ -113,8 +112,11 @@ class Login extends Component {
                 style={{ borderTop: '1px solid lightgray ' }}
               >
                 <div className="mt-20 center-text">
-                  <Link to="/registro">Registrarme </Link> |
-                  <Link to="/registro"> Recuperar contraseña</Link>
+                  <a onClick={() => alert('registro es es la página web')}>
+                    Registrarme
+                  </a>
+                  {/* <Link to="/registro">Registrarme </Link> | */}
+                  {/* <Link to="/registro"> Recuperar contraseña</Link> */}
                 </div>
               </Col>
             </Row>
@@ -125,4 +127,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { facebookLogin, login })(Login)
+export default connect(null, { login })(Login)

@@ -4,7 +4,7 @@ import {
   getProductos,
   getProductosDestacados
 } from '../actions/productos_actions'
-import { InputSearch, LoadingCard } from '../components'
+import { InputSearch } from '../components'
 import { Producto } from '../components'
 import empty_cart from '../empty_cart.png'
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { PerfilForm } from '../components'
-import { registro } from '../actions/auth_acions'
+// import { registro } from '../actions/auth_acions'
 import { Col, Layout, Row } from 'antd'
 const { Content } = Layout
 
@@ -40,5 +39,5 @@ class Registro extends Component {
     )
   }
 }
-
-export default connect(null, { registro })(Registro)
+export default Registro
+// export default connect(null, { registro })(Registro)

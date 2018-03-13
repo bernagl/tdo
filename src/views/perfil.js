@@ -4,8 +4,8 @@ import { cerrarSesion } from '../actions/auth_acions'
 import { vaciarCarrito } from '../actions/carrito_actions'
 import { vaciarDireccion } from '../actions/direccion_actions'
 import { vaciarPedidos } from '../actions/pedido_actions'
-import { actualizarPerfil } from '../actions/perfil_actions'
-import { Direcciones, PedidoList, PerfilForm } from '../components'
+// import { actualizarPerfil } from '../actions/perfil_actions'
+import { PedidoList, PerfilForm } from '../components'
 import { Col, Divider, Icon, Row, Tabs } from 'antd'
 const { TabPane } = Tabs
 
@@ -42,7 +42,7 @@ class Perfil extends Component {
                   <Col span={24}>
                     <PerfilForm
                       titulo="Guardar"
-                      action={this.props.actualizarPerfil}
+                      // action={this.props.actualizarPerfil}
                       usuario={usuario}
                     />
                   </Col>
@@ -89,7 +89,7 @@ function mapDispatchToProps({ auth }) {
 }
 
 export default connect(mapDispatchToProps, {
-  actualizarPerfil,
+  // actualizarPerfil,
   cerrarSesion,
   vaciarCarrito,
   vaciarDireccion,

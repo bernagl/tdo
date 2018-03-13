@@ -16,6 +16,7 @@ export const login = ({ correo, contrasena }) => async dispatch => {
   //     }
   //   }
   // )
+
   const user = {
     ID: '3',
     user_login: 'Luis',
@@ -30,12 +31,18 @@ export const login = ({ correo, contrasena }) => async dispatch => {
   // data.status === 202 && dispatch({ type: INICIAR_SESION, payload: data.data })
   // return data.status
 
-  dispatch({ type: INICIAR_SESION, payload: user })
+  dispatch({
+    type: INICIAR_SESION,
+    payload: user
+  })
   return 202
 }
 
 const isError = () => dispatch => {
-  dispatch({ type: IS_ERROR, payload: true })
+  dispatch({
+    type: IS_ERROR,
+    payload: true
+  })
 }
 
 const request = async url => {

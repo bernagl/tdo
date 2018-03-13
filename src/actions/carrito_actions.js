@@ -7,7 +7,7 @@ import {
 } from './types'
 import { PURGE } from 'redux-persist'
 import WooCommerce from './woocommerce'
-import firebase from './firebase'
+// import firebase from './firebase'
 
 export const agregarProducto = producto => dispatch => {
   dispatch({ type: AGREGAR_PRODUCTO, payload: producto })

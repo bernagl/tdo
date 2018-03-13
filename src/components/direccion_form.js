@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Formsy from 'formsy-react'
 import { setDireccion } from '../actions/direccion_actions'
-import { Button, Col, Divider, Icon, message, Row } from 'antd'
+import { Button, Divider, message } from 'antd'
 import { Minput, Mselect } from '../components'
 
 class DireccionForm extends Component {

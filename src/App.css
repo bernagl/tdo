@@ -212,6 +212,7 @@
 .carrito-footer .carrito-atras-siguiente-btn {
   width: 50%;
   border-radius: 0px;
+  margin-left: 0px !important
 }
 
 .carrito-footer .carrito-grupo-de-botones {
