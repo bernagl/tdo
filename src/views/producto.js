@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getProducto, getVariaciones } from '../actions/productos_actions'
 import { agregarProducto } from '../actions/carrito_actions'
 import { BreadCrumb, LoadingCard } from '../components'
+import DocumentTitle from 'react-document-title'
 import { Tag, Carousel, Button, Icon, Layout, message, Row, Col } from 'antd'
 const { Footer } = Layout
 
@@ -101,67 +102,71 @@ class Producto extends Component {
         .replace('<p>', '')
         .replace('</p>', ''))
     !producto && getProducto(match.params.id)
-    return !producto ? (
-      <LoadingCard cantidad={1} />
-    ) : (
-      <div>
-        <BreadCrumb urls={urls} />
-        <Row className="producto-main-row">
-          <Col span={24}>
-            {producto.images.length > 1 ? (
-              <Carousel>{this.renderImagenes()}</Carousel>
-            ) : (
-              <img
-                src={producto.images[0].src}
-                style={{ width: '100%' }}
-                alt={producto.name}
-              />
-            )}
-          </Col>
-          <Col span={24} className="producto-nombre-col">
-            <h3>{producto.name}</h3>
-          </Col>
-          <Col span={24}>
-            <p>{producto.description}</p>
-            <hr />
-          </Col>
-          <Col span={24}>
-            <h4>Categorías:</h4>
-            {this.renderCategorias()}
-          </Col>
-          <Col span={24} className="producto-variaciones-col">
-            {producto.variations.length > 0 && (
-              <div>
-                <h4>Variantes:</h4>
-                {this.props.variaciones.id === match.params.id ? (
-                  <div>{this.renderVariaciones()}</div>
+    return (
+      <DocumentTitle title="Producto">
+        {!producto ? (
+          <LoadingCard cantidad={1} />
+        ) : (
+          <React.Fragment>
+            <BreadCrumb urls={urls} />
+            <Row className="producto-main-row">
+              <Col span={24}>
+                {producto.images.length > 1 ? (
+                  <Carousel>{this.renderImagenes()}</Carousel>
                 ) : (
-                  <Icon type="loading" />
+                  <img
+                    src={producto.images[0].src}
+                    style={{ width: '100%' }}
+                    alt={producto.name}
+                  />
                 )}
-              </div>
-            )}
-          </Col>
-        </Row>
-        <Footer className="producto-footer">
-          <Row type="flex" justify="space-around" align="middle">
-            <Col span={12} className="producto-precio-col">
-              <h1 className="producto-precio">
-                ${this.formatearPrecio(producto.price)}
-              </h1>
-            </Col>
-            <Col span={12}>
-              <Button
-                onClick={this.agregarProducto.bind(this, producto)}
-                type="primary"
-                icon="shopping-cart"
-                className="add-to-cart-button"
-              >
-                Agregar
-              </Button>
-            </Col>
-          </Row>
-        </Footer>
-      </div>
+              </Col>
+              <Col span={24} className="producto-nombre-col">
+                <h3>{producto.name}</h3>
+              </Col>
+              <Col span={24}>
+                <p>{producto.description}</p>
+                <hr />
+              </Col>
+              <Col span={24}>
+                <h4>Categorías:</h4>
+                {this.renderCategorias()}
+              </Col>
+              <Col span={24} className="producto-variaciones-col">
+                {producto.variations.length > 0 && (
+                  <div>
+                    <h4>Variantes:</h4>
+                    {this.props.variaciones.id === match.params.id ? (
+                      <div>{this.renderVariaciones()}</div>
+                    ) : (
+                      <Icon type="loading" />
+                    )}
+                  </div>
+                )}
+              </Col>
+            </Row>
+            <Footer className="producto-footer">
+              <Row type="flex" justify="space-around" align="middle">
+                <Col span={12} className="producto-precio-col">
+                  <h1 className="producto-precio">
+                    ${this.formatearPrecio(producto.price)}
+                  </h1>
+                </Col>
+                <Col span={12}>
+                  <Button
+                    onClick={this.agregarProducto.bind(this, producto)}
+                    type="primary"
+                    icon="shopping-cart"
+                    className="add-to-cart-button"
+                  >
+                    Agregar
+                  </Button>
+                </Col>
+              </Row>
+            </Footer>
+          </React.Fragment>
+        )}
+      </DocumentTitle>
     )
   }
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getProductosByCategoria } from '../actions/categorias_actions'
 import { toggleLoading } from '../actions/general_actions'
 import { LoadingCard, Producto } from '../components'
+import DocumentTitle from 'react-document-title'
 
 class Categoria extends Component {
   constructor(props) {
@@ -39,24 +40,15 @@ class Categoria extends Component {
 
   render() {
     const { match, productos } = this.props
-    return productos[match.params.id] ? (
-      <div className="row">{this.renderProductos()}</div>
-    ) : (
-      <LoadingCard cantidad={5} />
+    return (
+      <DocumentTitle title="Categoría">
+        {productos[match.params.id] ? (
+          <div className="row">{this.renderProductos()}</div>
+        ) : (
+          <LoadingCard cantidad={5} />
+        )}
+      </DocumentTitle>
     )
-    // productos[]
-    // if (
-    // this.props.productos.categoria.length <= 0 ||
-    // this.props.productos.categoria_seleccionada !== this.props.match.params.id
-    // ) {
-    //   return (
-    //     <div>
-    //       <LoadingCard cantidad={5} />
-    //     </div>
-    //   )
-    // }
-    // return <div className="row">...</div>
-    // return <div className="row">{this.renderProductos()}</div>
   }
 }
 

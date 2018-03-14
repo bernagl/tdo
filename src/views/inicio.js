@@ -6,6 +6,7 @@ import {
 } from '../actions/productos_actions'
 import { LoadingCard } from '../components'
 import { InputSearch, Producto, Sidebar } from '../components'
+import DocumentTitle from 'react-document-title'
 
 class Inicio extends Component {
   constructor(props) {
@@ -40,10 +41,12 @@ class Inicio extends Component {
       return <LoadingCard cantidad={5} />
     }
     return (
-      <div className="row">
-        <InputSearch history={this.props.history} />
-        {this.renderProducto()}
-      </div>
+      <DocumentTitle title="Inicio">
+        <div className="row">
+          <InputSearch history={this.props.history} />
+          {this.renderProducto()}
+        </div>
+      </DocumentTitle>
     )
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Button, Icon, Layout, message, Row, Col } from 'antd'
 import { CarritoItem, DireccionForm } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
+import DocumentTitle from 'react-document-title'
 import empty_cart from '../empty_cart.png'
 
 const { Footer } = Layout
@@ -55,13 +56,7 @@ class Carrito extends Component {
 
   async enviarPedido() {
     let productos = []
-    const {
-      auth,
-      carrito,
-      direccion,
-      enviarPedido,
-      vaciarCarrito
-    } = this.props
+    const { auth, carrito, direccion, enviarPedido, vaciarCarrito } = this.props
 
     for (const producto in carrito) {
       productos.push({
@@ -109,65 +104,69 @@ class Carrito extends Component {
   }
 
   render() {
-    console.log(this.props)
     if (Object.keys(this.props.carrito).length > 0) {
       return (
-        <div className="carrito">
-          <div className="carrito-container">
-            {this.state.paso === 0 && this.renderProductos()}
-            {this.state.paso === 1 && (
-              <Row>
+        <DocumentTitle title="Carrito">
+          <div className="carrito">
+            <div className="carrito-container">
+              {this.state.paso === 0 && this.renderProductos()}
+              {this.state.paso === 1 && (
+                <Row>
+                  <Col span={24}>
+                    <DireccionForm />
+                  </Col>
+                </Row>
+              )}
+            </div>
+            <Footer className="carrito-footer">
+              <Row type="flex" justify="space-around" align="middle">
+                <Col span={24} className="carrito-precio-col">
+                  <h1 className="carrito-precio">
+                    Total: ${this.formatearPrecio(this.state.total)}
+                  </h1>
+                </Col>
                 <Col span={24}>
-                  <DireccionForm />
+                  <Button.Group
+                    size="large"
+                    className="carrito-grupo-de-botones"
+                  >
+                    <Button
+                      onClick={this.atras}
+                      disabled={this.state.paso === 0 && true}
+                      type="primary"
+                      className="carrito-atras-siguiente-btn"
+                    >
+                      <Icon type="left" />Atrás
+                    </Button>
+                    {this.state.paso < 1 ? (
+                      <Button
+                        onClick={this.siguiente}
+                        type="primary"
+                        className="carrito-atras-siguiente-btn"
+                      >
+                        Siguiente<Icon type="right" />
+                      </Button>
+                    ) : (
+                      <Button
+                        type="primary"
+                        icon={this.state.status}
+                        onClick={this.enviarPedido}
+                        className="carrito-atras-siguiente-btn"
+                        disabled={
+                          !this.props.direccion &&
+                          this.state.direccion !== 0 &&
+                          true
+                        }
+                      >
+                        {this.state.titulo}
+                      </Button>
+                    )}
+                  </Button.Group>
                 </Col>
               </Row>
-            )}
+            </Footer>
           </div>
-          <Footer className="carrito-footer">
-            <Row type="flex" justify="space-around" align="middle">
-              <Col span={24} className="carrito-precio-col">
-                <h1 className="carrito-precio">
-                  Total: ${this.formatearPrecio(this.state.total)}
-                </h1>
-              </Col>
-              <Col span={24}>
-                <Button.Group size="large" className="carrito-grupo-de-botones">
-                  <Button
-                    onClick={this.atras}
-                    disabled={this.state.paso === 0 && true}
-                    type="primary"
-                    className="carrito-atras-siguiente-btn"
-                  >
-                    <Icon type="left" />Atrás
-                  </Button>
-                  {this.state.paso < 1 ? (
-                    <Button
-                      onClick={this.siguiente}
-                      type="primary"
-                      className="carrito-atras-siguiente-btn"
-                    >
-                      Siguiente<Icon type="right" />
-                    </Button>
-                  ) : (
-                    <Button
-                      type="primary"
-                      icon={this.state.status}
-                      onClick={this.enviarPedido}
-                      className="carrito-atras-siguiente-btn"
-                      disabled={
-                        !this.props.direccion &&
-                        this.state.direccion !== 0 &&
-                        true
-                      }
-                    >
-                      {this.state.titulo}
-                    </Button>
-                  )}
-                </Button.Group>
-              </Col>
-            </Row>
-          </Footer>
-        </div>
+        </DocumentTitle>
       )
     }
     return (
