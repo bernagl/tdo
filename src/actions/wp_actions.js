@@ -1,6 +1,5 @@
 import axios from 'axios'
-import WooCommerce from './woocommerce'
-import { INICIAR_SESION, IS_ERROR } from './types'
+import { GET_NOTICIAS, INICIAR_SESION } from './types'
 
 // let bridge = false
 
@@ -18,6 +17,13 @@ export const login = ({ correo, contrasena }) => async dispatch => {
       }
     }
   )
+  if (data.status === 202) {
+    dispatch({ type: INICIAR_SESION, payload: data.data })
+    localStorage.setItem('user', JSON.stringify(data.data))(
+      (window.location.href = `login.html?email=${data.data.user_email}`)
+    )
+  }
+  return data.status
 
   // const user = {
   //   ID: '3',
@@ -29,41 +35,20 @@ export const login = ({ correo, contrasena }) => async dispatch => {
   //   user_status: '0',
   //   user_url: ''
   // }
-
-  data.status === 202 &&
-    (dispatch({ type: INICIAR_SESION, payload: data.data }),
-    window.postMessage(JSON.stringify(data.data)))
-  return data.status
-
   // dispatch({
   //   type: INICIAR_SESION,
   //   payload: user
   // })
+
+  // localStorage.setItem('user', JSON.stringify(user))
+  // window.location.href = `p.html?email=${user.user_email}`
   // return 202
 }
 
-const isError = () => dispatch => {
-  dispatch({
-    type: IS_ERROR,
-    payload: true
-  })
+export const getNoticias = () => async dispatch => {
+  const { data } = await axios.get(
+    'http://tdorthodontics.com/wp-json/wp/v2/promociones'
+  )
+  console.log(data)
+  dispatch({ type: GET_NOTICIAS, payload: data })
 }
-
-const request = async url => {
-  try {
-    const data = await WooCommerce.postAsync(url)
-    return JSON.parse(data.toJSON().body)
-  } catch (e) {
-    isError()
-  }
-}
-
-// const waitForBridge = () => {
-//   if (window.postMessage.length !== 1) {
-//     setTimeout(waitForBridge, 200)
-//   } else {
-//     bridge = true
-//   }
-// }
-
-// waitForBridge()

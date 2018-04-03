@@ -6,7 +6,6 @@ import {
   GET_VARIACIONES,
   SEARCH
 } from '../actions/types'
-import { REHYDRATE, PURGE } from 'redux-persist'
 
 const INITIAL_STATE = {
   data: {},
@@ -52,7 +51,6 @@ export default function(state = INITIAL_STATE, action) {
       //   }
       //   return state
       // case PURGE:
-      return {}
     default:
       return state
   }

@@ -5,6 +5,7 @@ import Direccion from './direccion'
 import Inicio from './inicio'
 import Login from './login'
 import Main from './app'
+import Noticias from './noticias'
 import Carrito from './carrito'
 import Perfil from './perfil'
 import Registro from './registro'
@@ -19,6 +20,7 @@ export {
   Direccion,
   Inicio,
   Main,
+  Noticias,
   Login,
   Perfil,
   Registro,

@@ -4,7 +4,7 @@ import {
   getProductos,
   getProductosDestacados
 } from '../actions/productos_actions'
-import { InputSearch, Producto } from '../components'
+import { Producto } from '../components'
 import DocumentTitle from 'react-document-title'
 import empty_cart from '../empty_cart.png'
 
@@ -50,7 +50,7 @@ class Search extends Component {
     return (
       <DocumentTitle title="Búsqueda">
         <div className="row">
-          <InputSearch history={this.props.history} />
+          {/* <InputSearch history={this.props.history} /> */}
           <div className="col-xs-12">
             <h4>Resultados para: {this.props.match.params.search}</h4>
           </div>

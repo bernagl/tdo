@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    <script>
+        // function waitForBridge() {
+
+        //     //the react native postMessage has only 1 parameter
+        //     //while the default one has 2, so check the signature
+        //     //of the function
+
+        //     if (window.postMessage.length !== 1) {
+        //         setTimeout(waitForBridge, 200);
+        //     } else {
+        //         const user = localStorage.getItem('user')
+        //         localStorage.setItem('logged', true)
+        //         window.postMessage(JSON.stringify(user))
+        //         window.location.href = 'index.html'
+        //     }
+        // }
+
+        // window.onload = waitForBridge;
+        setTimeout(() => {
+            localStorage.setItem('logged', true)
+            window.location.href = 'index.html'
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

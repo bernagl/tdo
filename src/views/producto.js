@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getProducto, getVariaciones } from '../actions/productos_actions'
 import { agregarProducto } from '../actions/carrito_actions'
-import { BreadCrumb, LoadingCard } from '../components'
+import { LoadingCard } from '../components'
 import DocumentTitle from 'react-document-title'
 import { Tag, Carousel, Button, Icon, Layout, message, Row, Col } from 'antd'
 const { Footer } = Layout
@@ -93,22 +93,18 @@ class Producto extends Component {
   render() {
     const { match, productos, getProducto } = this.props
     const producto = productos[match.params.id]
-    const urls = [
-      { name: 'Inicio', path: '/', icon: 'home' },
-      { name: 'Producto', path: match.url }
-    ]
     producto &&
       (producto.description = producto.description
         .replace('<p>', '')
         .replace('</p>', ''))
     !producto && getProducto(match.params.id)
+    console.log(producto)
     return (
       <DocumentTitle title="Producto">
         {!producto ? (
           <LoadingCard cantidad={1} />
         ) : (
           <React.Fragment>
-            <BreadCrumb urls={urls} />
             <Row className="producto-main-row">
               <Col span={24}>
                 {producto.images.length > 1 ? (

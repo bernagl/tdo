@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Formsy from 'formsy-react'
 // import { facebookLogin } from '../actions/auth_acions'
 import { login } from '../actions/wp_actions'
+import { getProductos } from '../actions/productos_actions'
+import { getCategorias } from '../actions/categorias_actions'
 import { Button, Col, Divider, Layout, message, Row } from 'antd'
 import { Minput } from '../components'
 const { Content } = Layout
@@ -21,19 +23,19 @@ class Login extends Component {
     this.enableButton = this.enableButton.bind(this)
   }
 
+  componentDidMount() {
+    this.props.getProductos()
+    this.props.getCategorias()
+    this.props.getNoticias()
+  }
+
   async submit(model) {
     this.setState({ loading: true })
-    console.log(model)
     const response = await this.props.login(model)
-    console.log(response)
-    response === 404 &&
-      (message.error('Usuario o contraseña incorrectos'),
-      this.setState({ loading: false }))
-    // if (response) this.props.history.push('/')
-    // else {
-    //   message.error('Usuario o contraseña incorrectos')
-    //   this.setState({ loading: false })
-    // }
+    if (response === 404) {
+      message.error('Usuario o contraseña incorrectos')
+      this.setState({ loading: false })
+    }
   }
 
   disableButton() {
@@ -127,4 +129,8 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { login })(Login)
+export default connect(null, {
+  getCategorias,
+  getProductos,
+  login
+})(Login)

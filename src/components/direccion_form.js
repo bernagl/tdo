@@ -32,12 +32,18 @@ class DireccionForm extends Component {
 
   componentDidMount() {
     const { auth, direccion } = this.props
-    direccion
-      ? this.setState({ direccion: { ...direccion } })
-      : (this.setState({
-          direccion: { first_name: auth.user_login, email: auth.user_email }
-        }),
-        this.disableButton())
+    if (!direccion) this.disableButton()
+    this.setState({
+      direccion: direccion
+        ? { ...direccion }
+        : { first_name: auth.user_login, email: auth.user_email }
+    })
+    // direccion
+    //   ? this.setState({ direccion: { ...direccion } })
+    //   : (this.setState({
+    //       direccion: { first_name: auth.user_login, email: auth.user_email }
+    //     }),
+    //     this.disableButton())
   }
 
   disableButton() {

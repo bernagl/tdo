@@ -4,7 +4,6 @@ import {
   ACTUALIZAR_DIRECCION,
   SET_DIRECCION
 } from '../actions/types'
-import { PURGE } from 'redux-persist'
 const INITIAL_STATE = {
   direcciones: [],
   direccion: {}

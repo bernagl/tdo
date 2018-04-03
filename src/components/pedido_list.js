@@ -65,22 +65,15 @@ class PedidoList extends Component {
   }
 
   render() {
-    const { marginTop } = this.state
     const { data } = this.props.pedido
-    console.log(marginTop)
-    return (
-      <div style={{ marginTop: marginTop }}>
-        {data.length > 0 ? (
-          <List className="pedido-list">{this.renderPedidos()}</List>
-        ) : (
-          <Row type="flex">
-            <Col span={24}>
-              {/* <Icon type="loading" /> */}
-              <span>No tienes ningún pedido</span>
-            </Col>
-          </Row>
-        )}
-      </div>
+    return data.length > 0 ? (
+      <List className="pedido-list">{this.renderPedidos()}</List>
+    ) : (
+      <Row type="flex">
+        <Col span={24}>
+          <span>No tienes ningún pedido</span>
+        </Col>
+      </Row>
     )
   }
 }

@@ -1,7 +1,7 @@
 import {
   INICIAR_SESION,
   ACTUALIZAR_PERFIL,
-  CERRAR_SESION
+  CERRAR_SESION,
 } from '../actions/types'
 
 export default function(state = null, action) {

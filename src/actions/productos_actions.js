@@ -9,7 +9,6 @@ import {
 } from './types'
 
 export const getProducto = id => async dispatch => {
-  let producto
   let result = await request(`products/${id}`)
   // result.producto = JSON.parse(data.toJSON().body)
   // producto = JSON.parse(data.toJSON().body)

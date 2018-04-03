@@ -7,20 +7,30 @@
     <textarea style="height: 50%; width: 100%;" readonly></textarea>
 
     <script>
-        function waitForBridge() {
+        // function waitForBridge() {
 
-            //the react native postMessage has only 1 parameter
-            //while the default one has 2, so check the signature
-            //of the function
+        //     //the react native postMessage has only 1 parameter
+        //     //while the default one has 2, so check the signature
+        //     //of the function
 
-            if (window.postMessage.length !== 1) {
-                setTimeout(waitForBridge, 200);
-            } else {
-                window.postMessage('abc');
-            }
+        //     if (window.postMessage.length !== 1) {
+        //         setTimeout(waitForBridge, 200);
+        //     } else {
+        //         window.postMessage('abc');
+        //     }
+        // }
+        const user = {
+            ID: '3',
+            user_login: 'Luis',
+            user_email: 'luisg@mobkii.com',
+            user_pass: '^#fIOMW6ULmoa4N2D^lP@W29',
+            user_nicename: 'luis',
+            user_registered: '2018-03-06 16:16:22',
+            user_status: '0',
+            user_url: ''
         }
-
-        window.onload = waitForBridge;
+        window.postMessage(JSON.stringify(user))
+        // window.onload = waitForBridge;
     </script>
 
 </body>

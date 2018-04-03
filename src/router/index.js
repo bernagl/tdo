@@ -8,6 +8,7 @@ import {
   Inicio,
   Login,
   Main,
+  Noticias,
   Perfil,
   Pedido,
   Producto,
@@ -36,6 +37,7 @@ export const Aplicacion = () => {
         <Route exact path="/perfil" component={Perfil} />
         <Route exact path="/direccion/:id?" component={Direccion} />
         <Route exact path="/prueba" component={Prueba} />
+        <Route exact path="/noticias" component={Noticias} />
         <Route exact path="/pedido/:id" component={Pedido} />
         <Route exact path="/" component={Inicio} />
       </Switch>

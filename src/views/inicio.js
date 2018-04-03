@@ -5,7 +5,7 @@ import {
   getProductosDestacados
 } from '../actions/productos_actions'
 import { LoadingCard } from '../components'
-import { InputSearch, Producto, Sidebar } from '../components'
+import { Producto } from '../components'
 import DocumentTitle from 'react-document-title'
 
 class Inicio extends Component {
@@ -43,7 +43,7 @@ class Inicio extends Component {
     return (
       <DocumentTitle title="Inicio">
         <div className="row">
-          <InputSearch history={this.props.history} />
+          {/* <InputSearch history={this.props.history} /> */}
           {this.renderProducto()}
         </div>
       </DocumentTitle>

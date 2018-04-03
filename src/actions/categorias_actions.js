@@ -4,6 +4,7 @@ import { GET_CATEGORIAS } from './types'
 export const getCategorias = () => async dispatch => {
   const data = await WooCommerce.getAsync('products/categories')
   const result = JSON.parse(data.toJSON().body)
+  // window.postMessage(JSON.stringify(result))
   dispatch({ type: GET_CATEGORIAS, payload: result })
 }
 
